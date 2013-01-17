@@ -13,9 +13,16 @@ rl.question("What adress want you to connect to?", function(answer)
 	console.log("Connecting to server : ( " + answer + " ).");
 	
 
-	var socket = new io.Socket(address);
+	var socketOptions = {
+			host : 'http://localhost',
+			port: 12345
+		};
+	
+	var	socket = new io.Socket("http://localhost/", socketOptions);
+	console.log(socket);
 	socket.connect();
-
+	console.log("na start verbinden:");
+	console.log(socket);
 	socket.on('connect', function(){
 		console.log("You are succesfully connected");
 	});
@@ -25,7 +32,7 @@ rl.question("What adress want you to connect to?", function(answer)
 
 	rl.close();
 	
-	console.log(socket);
+	
 
 });
 
