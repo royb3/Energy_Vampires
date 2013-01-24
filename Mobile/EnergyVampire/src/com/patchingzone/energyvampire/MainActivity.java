@@ -14,6 +14,7 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.Settings;
@@ -38,9 +39,9 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
 	private Button BT_home;
-	private Button BT_GPS;
 	private TextView info;
 	private TextView count;
+	private TextView GPS;
 	private Boolean ConnectOk = false;
 	private RelativeLayout body;
 	
@@ -54,7 +55,7 @@ public class MainActivity extends Activity {
 		this.body = (RelativeLayout) this.findViewById(R.id.body);
 		//button 1 
 		this.BT_home = (Button) this.findViewById(R.id.button1);
-		this.BT_GPS = (Button) this.findViewById(R.id.GPS);
+		this.GPS = (TextView) this.findViewById(R.id.textView2); 
 		
 		this.BT_home.setOnClickListener(new OnClickListener() {
 			
@@ -79,7 +80,7 @@ public class MainActivity extends Activity {
 	    switch (item.getItemId()) {
 	        case R.id.GPS:
 	        	Log.e("gps", "start");
-	        	
+	        	GPS.setVisibility(View.VISIBLE);
 	        	LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);	        	
 	        	LocationManager locationManager;
 	        	String provider;
@@ -118,6 +119,7 @@ public class MainActivity extends Activity {
 			        	Log.e("long", ""+location.getLongitude());
 			        	Log.e("acc", ""+location.getAccuracy());
 			        	Log.e("alt", ""+location.getAltitude());
+			        	GPS.setText("lat"+location.getLatitude()+" \nLong"+location.getLongitude()+" \nAcc"+location.getAccuracy());
 					}
 				});
 	        	

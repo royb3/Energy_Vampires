@@ -52,4 +52,15 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#fff" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:textColor="#fff"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Count"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="35dp"
+        android:text="GPS DATA \nShows Here" />
+
 </RelativeLayout>
