@@ -92,7 +92,7 @@ function connect(socket, data){
   // async
   chatClients[socket.id] = data;
 
-  // NOw the client object is ready, update
+  // Now the client object is ready, update
   // the client
   socket.emit('ready', { clientId: data.clientId });
 
