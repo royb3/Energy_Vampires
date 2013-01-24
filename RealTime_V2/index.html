@@ -1,0 +1,12 @@
+<script type="text/javascript" src="socket.io.js"></script>
+<script type="text/javascript">
+	var socket = io.connect('http://localhost');
+
+	socket.on('connect', function () {
+		socket.emit('user_connected', { nickname: 'Zadkine'});
+	});
+
+	socket.on('error', function() {
+		console.log('The connection has failed.');
+	});
+</script>
