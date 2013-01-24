@@ -10,14 +10,22 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Random;
 
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.provider.Settings;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.TransitionDrawable;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.ConsoleMessage;
@@ -30,6 +38,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
 	private Button BT_home;
+	private Button BT_GPS;
 	private TextView info;
 	private TextView count;
 	private Boolean ConnectOk = false;
@@ -45,6 +54,8 @@ public class MainActivity extends Activity {
 		this.body = (RelativeLayout) this.findViewById(R.id.body);
 		//button 1 
 		this.BT_home = (Button) this.findViewById(R.id.button1);
+		this.BT_GPS = (Button) this.findViewById(R.id.GPS);
+		
 		this.BT_home.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -61,7 +72,59 @@ public class MainActivity extends Activity {
 				
 			}
 		});
-		
+				
+	}
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	        case R.id.GPS:
+	        	Log.e("gps", "start");
+	        	
+	        	LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);	        	
+	        	LocationManager locationManager;
+	        	String provider;
+	        	locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+	        	    // Define the criteria how to select the locatioin provider -> use
+	        	    // default
+        	    Criteria criteria = new Criteria();
+        	    criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        	    provider = locationManager.getBestProvider(criteria, false);
+        	    //Log.e("asd", ""+locationManager.getAllProviders());
+        	    locationManager.requestLocationUpdates(provider, 100, 1, new LocationListener() {
+					
+					@Override
+					public void onStatusChanged(String provider, int status, Bundle extras) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void onProviderEnabled(String provider) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void onProviderDisabled(String provider) {
+						// TODO Auto-generated method stub
+						Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+			        	  startActivity(intent);
+					}
+					
+					@Override
+					public void onLocationChanged(Location location) {
+						// TODO Auto-generated method stub
+						Log.e("Lat", ""+location.getLatitude());
+			        	Log.e("long", ""+location.getLongitude());
+			        	Log.e("acc", ""+location.getAccuracy());
+			        	Log.e("alt", ""+location.getAltitude());
+					}
+				});
+	        	
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
 	}
 
 	public void connect()
@@ -114,7 +177,7 @@ public class MainActivity extends Activity {
 		    	 int Min = 1;
 		    	 int Max = 4;
 		    	 int rndNum = (int) (Math.random() * ( Max - Min ));
-		         Color(rndNum);
+		         Color(3);
 		     }
 		  }.start();
 	}
