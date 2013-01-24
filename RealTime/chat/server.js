@@ -5,7 +5,7 @@ var express   = require('express');
     app       = express();
     server    = require('http').createServer(app);
     io        = require('socket.io').listen(server);
-    port      = 80,
+    port      = 25025,
 
 
     // Hash objects to save clients data
@@ -67,7 +67,7 @@ io.sockets.on('connection', function(socket) {
   });
 
   // Client unsubscribe from a room
-  socket.on('ubsubscribe', function(data){
+  socket.on('unsubscribe', function(data){
     unsubscribe(socket, data);
   });
 
@@ -75,7 +75,7 @@ io.sockets.on('connection', function(socket) {
   // function or closes the browser, this event
   // is built in socket.io so we actually don't
   // need to fire it manually
-  socket.on('disonnect', function(data){
+  socket.on('disconnect', function(data){
     disconnect(socket);
   });
 })
@@ -92,12 +92,18 @@ function connect(socket, data){
   // async
   chatClients[socket.id] = data;
 
-  // Now the client object is ready, update
+  // NOw the client object is ready, update
   // the client
   socket.emit('ready', { clientId: data.clientId });
 
   // Auto subscribe the client to the 'lobby'
   subscribe(socket, { room: 'lobby' });
+
+  // sends a notification to all clients.
+  //socket.broadcast.to(data.room).emit('chatmessage', { message: "Server: " + socket.id + " connected tho the channel!", room: 'lobby' });
+
+  socket.broadcast.to(data.room).emit('news', { message: data.nickname + " had connected to the server...", room : 'lobby' });
+
 
   // Sends a list of all active rooms in the
   // server
@@ -113,7 +119,7 @@ function disconnect(socket){
   // Unsubscribe from the rooms
   for(var room in rooms){
     if(room && rooms[room]){
-      ubsubscribe(socket, { room: room.replace('/', '') });
+      unsubscribe(socket, { room: room.replace('/', '') });
     }
   }
 
@@ -187,7 +193,7 @@ function getRooms(){
 // Get array of clients in a room
 function getClientsInRoom(socketId, room){
   // Get array of socket id's in this room
-  var socketId = io.sockets.manager.room['/' + room];
+  var socketIds = io.sockets.manager.rooms['/' + room];
   var clients = [];
 
   if(socketIds && socketIds.length > 0){
@@ -228,7 +234,7 @@ function updatePresence(room, socket, state){
   // By using 'socket.broadcast' we can send/emit
   // a message/event to all other clients except
   // the sender himself
-  socket.broadast.to(room).emit('presence', { client:
+  socket.broadcast.to(room).emit('presence', { client:
     chatClients[socket.id], state: state, room: room });
 }
 

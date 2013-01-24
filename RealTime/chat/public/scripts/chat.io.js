@@ -12,7 +12,7 @@
       currentRoom = null,
 
       // Server information
-      serverAddress = 'localhost',
+      serverAddress = '84.84.32.69:25025',
       serverDisplayName = 'Server',
       serverDisplayColor = '#1c5380',
 
@@ -64,7 +64,7 @@
       handleNickname();
     });
 
-    $('#addroom-popup .input input').on('keywdown', function(e){
+    $('#addroom-popup .input input').on('keydown', function(e){
       var key = e.which || e.keyCode;
       if(key == 13) { createRoom(); }
     });
@@ -158,13 +158,17 @@
 
     // When someone sends a message, the server pushes it to
     // our client through this event with a relevant data
-    socekt.on('chatmessage', function(data){
+    socket.on('chatmessage', function(data){
       var nickname = data.client.nickname;
       var message = data.message;
 
       // Display the message in the chat window
       insertMessage(nickname, message, true, false, false);
     });
+
+    socket.on('news', function(data){
+      insertMessage('server', data.message, true, false, true);
+    })
 
     // When we subscribe to a room, the server sends a list
     // with the clients in this room
@@ -277,9 +281,10 @@
   // to the existing room
   function createRoom(){
     var room = $('#addroom-popup .input input').val().trim();
+    console.log("value of room:"+room);
     if(room && room.length <= ROOM_MAX_LENGTH &&
       room != currentRoom){
-
+    Avgrund.hide();
       // Show room creating message
     $('.chat-shadow').show().find('.content')
     .html('Creating room: ' + room + '...');
@@ -289,7 +294,7 @@
     socket.emit('unsubscribe', { room: currentRoom });
 
     // Create and subscribe to the new room
-    socket.emit('subsribe', { room: room});
+    socket.emit('subscribe', { room: room});
     Avgrund.hide();
     } else {
     shake('#addroom-popup', '#addroom-popup .input input',
@@ -310,7 +315,7 @@
   // Save the client nickname and start the chat by
   // calling the 'connect()' function
   function handleNickname(){
-    var nick = $('$#nickname-popup .input input').val().trim();
+    var nick = $('#nickname-popup .input input').val().trim();
     if(nick && nick.length <= NICK_MAX_LENGTH){
       nickname = nick;
       Avgrund.hide();
@@ -390,7 +395,7 @@
   // in order to init the connection with the server
   function connect(){
     // Show connecting message
-    $('.chat-shadow .content').html('Cononecting...');
+    $('.chat-shadow .content').html('Connecting...');
 
     // Creating the connection and saving the socket
     socket = io.connect(serverAddress);
