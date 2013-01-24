@@ -124,6 +124,10 @@ public class MainActivity extends Activity {
 				});
 	        	
 	            return true;
+	        case R.id.Chat:
+	        	Intent sec=new Intent(MainActivity.this,Chat.class);
+                startActivity(sec);
+	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
