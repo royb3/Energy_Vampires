@@ -11,7 +11,11 @@ io.set('log level', 2);
 io.sockets.on('connection', function(socket) {
 	socket.on('user_connected', function(data){
 		connect(socket, data);
-	})
+	});
+
+	socket.on('test', function(data){
+		console.log(data.data);
+	});
 });
 
 function connect(socket, data){
@@ -28,6 +32,5 @@ function generateID(){
       0).toString(16).substring(1);
   };
 
-  return (S4() + S4() + "-" + S4() + "-" + S4() + "-" +
-    S4() + "-" + S4() + S4() + S4());
+  return (S4());
 }
