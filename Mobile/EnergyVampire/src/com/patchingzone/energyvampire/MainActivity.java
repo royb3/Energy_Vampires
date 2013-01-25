@@ -177,6 +177,14 @@ public class MainActivity extends Activity {
 
 		     public void onTick(long millisUntilFinished) {
 		         count.setText("" + millisUntilFinished / 1000);
+		         if(millisUntilFinished / 1000 < 1)
+		         {
+		        	 
+		         }
+		         else if(millisUntilFinished /1000 == 1)
+		         {
+		        	 
+		         }
 		     }
 
 		     public void onFinish() {
