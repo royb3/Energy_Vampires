@@ -4,5 +4,6 @@
 		"lat" : 0.000000,
 		"accuracy" : 0.000000,
 	},
-	"clientid" : "xxxxx"
+	
+	"clientId" : "xxxxx"
 }
