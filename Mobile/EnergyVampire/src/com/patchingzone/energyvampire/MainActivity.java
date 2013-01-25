@@ -31,6 +31,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 import android.webkit.ConsoleMessage;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -46,6 +49,7 @@ public class MainActivity extends Activity {
 	private TextView GPS;
 	private Boolean ConnectOk = false;
 	private RelativeLayout body;
+	private Animation fade;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,7 @@ public class MainActivity extends Activity {
 		//button 1 
 		this.BT_home = (Button) this.findViewById(R.id.button1);
 		this.GPS = (TextView) this.findViewById(R.id.textView2); 
+		fade = AnimationUtils.loadAnimation(this, R.anim.fade);
 		
 		this.BT_home.setOnClickListener(new OnClickListener() {
 			
@@ -197,7 +202,7 @@ public class MainActivity extends Activity {
 		    	 int Min = 1;
 		    	 int Max = 4;
 		    	 int rndNum = (int) (Math.random() * ( Max - Min ));
-		         Color(3);
+		         Color(40);
 		     }
 		  }.start();
 	}
@@ -209,33 +214,41 @@ public class MainActivity extends Activity {
 		// 20 = 5.10 sec
 		// 10 = 2.55 sec
 		final int multi = 20;
-		new CountDownTimer((255 * multi), 1) {
 
+	    	 
+    	 switch(color)
+    	 {
+	 		case 1:
+	 			body.setBackgroundColor(android.graphics.Color.BLUE);
+	   		break;
+	 		case 2:
+	 			body.setBackgroundColor(android.graphics.Color.GREEN);
+ 			break;
+	 		case 3:
+	 			body.setBackgroundColor(android.graphics.Color.RED);
+ 			break;
+	 		case 4:
+	 			body.setBackgroundColor(android.graphics.Color.YELLOW);
+ 			break;
+    	 }		  
+    	 body.startAnimation(fade);
 			
-		     public void onTick(long millisUntilFinished) 
-		     {		    	 
-		    	 switch(color)
-		    	 {
-	    	 		case 1:
-	    	 			body.setBackgroundColor(android.graphics.Color.rgb(((int)millisUntilFinished / multi),0,0)); 
-		    		break;
-	    	 		case 2:
-	    	 			body.setBackgroundColor(android.graphics.Color.rgb(0,((int)millisUntilFinished / multi),0)); 
-    	 			break;
-	    	 		case 3:
-	    	 			body.setBackgroundColor(android.graphics.Color.rgb(0,0,((int)millisUntilFinished / multi))); 
-    	 			break;
-	    	 		case 4:
-	    	 			body.setBackgroundColor(android.graphics.Color.rgb(((int)millisUntilFinished / multi),0,((int)millisUntilFinished / multi))); 
-    	 			break;
-		    	 }		         
-		     }
-
-		     public void onFinish() {
-		         
-		     }
-		  }.start(); 
+			 fade.setAnimationListener(new AnimationListener() {
+                public void onAnimationStart(Animation anim)
+                {
+                };
+                public void onAnimationRepeat(Animation anim)
+                {
+                };
+                public void onAnimationEnd(Animation anim)
+                {
+                    body.setVisibility(View.GONE);
+                };
+            });     
+    
 	}
+	
+	
 	
 	
 	@Override
