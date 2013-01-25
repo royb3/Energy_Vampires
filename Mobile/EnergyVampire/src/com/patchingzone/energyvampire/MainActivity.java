@@ -8,6 +8,8 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 import android.location.Criteria;
@@ -79,7 +81,7 @@ public class MainActivity extends Activity {
 	    // Handle item selection
 	    switch (item.getItemId()) {
 	        case R.id.GPS:
-	        	Log.e("gps", "start");
+	        	//Log.e("gps", "start");
 	        	GPS.setVisibility(View.VISIBLE);
 	        	LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);	        	
 	        	LocationManager locationManager;
@@ -115,11 +117,15 @@ public class MainActivity extends Activity {
 					@Override
 					public void onLocationChanged(Location location) {
 						// TODO Auto-generated method stub
-						Log.e("Lat", ""+location.getLatitude());
-			        	Log.e("long", ""+location.getLongitude());
-			        	Log.e("acc", ""+location.getAccuracy());
-			        	Log.e("alt", ""+location.getAltitude());
-			        	GPS.setText("lat"+location.getLatitude()+" \nLong"+location.getLongitude()+" \nAcc"+location.getAccuracy());
+						Date df = new java.util.Date(location.getTime());
+						String vv = new SimpleDateFormat("dd-MM-yyyy , HH:mm:ss").format(df);
+						
+						
+					GPS.setText("lat___:"+location.getLatitude()+
+			        			" \nLong__:"+location.getLongitude()+
+			        			" \nAcc___:"+location.getAccuracy()+
+			        			" \nTime__:"+vv+
+			        			" \nHead__:"+location.getBearing());
 					}
 				});
 	        	
