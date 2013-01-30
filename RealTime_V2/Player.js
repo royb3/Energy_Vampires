@@ -1,44 +1,46 @@
 function Player(id, username, lng, lat, score, team, nickname) {
-	private var this.playerId = id,
-		this.username = username,
-		this.lng = lng,
-		this.lat = lat,
-		this.score = score,
-		this.team = team,
-		this.nickname = nickname;
+	var playerId = id,
+		username = username,
+		lng = lng,
+		lat = lat,
+		score = score,
+		team = team,
+		nickname = nickname;
+		isReady = false;
 
-		public function addScore(value)
+		function addScore(value)
 		{
-			this.score += value;
+			score += value;
 		}
 
-		public function drainScore(value)
+		function drainScore(value)
 		{
-			this.score -= value;
+			score -= value;
 		}
 
-		public function switchTeam(team)
+		function switchTeam(team)
 		{
-			this.team = team;
+			team = team;
 		}
 
-		public function updateLocation(location)
+		function updateLocation(location)
 		{
-			this.lng = location.lng;
-			this.lat = location.lat;
+			lng = location.lng;
+			lat = location.lat;
 		}
 
-		public function getLocationPoint()
+		function getLocationPoint()
 		{
-			return "{" + this.lng + "," + this.lat + "}";
+			return "{" + lng + "," + lat + "}";
 		}
 
-		public getId() { return this.playerId; }
-		public getUsername() { return this.username; }
-		public getLng() { return this.lng; }
-		public getLat() { return this.lat; }
-		public getScore() { return this.score; }
-		public getTeam() { return this.team; }
-		public getNickname() { return this.nickname; }
-		public setNickname(value) { this.nickname = value; }
+		function getId() { return playerId; }
+		function getUsername() { return username; }
+		function getLng() { return lng; }
+		function getLat() { return lat; }
+		function getScore() { return score; }
+		function getTeam() { return team; }
+		function getNickname() { return nickname; }
+		function setNickname(value) { nickname = value; }
+		function getIsReady() { return isReady; }
 }

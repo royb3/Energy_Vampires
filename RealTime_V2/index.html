@@ -6,17 +6,17 @@
 		<script type="text/javascript">
 			var socket = io.connect('http://localhost');
 
-			socket.on('connect', function () {
-				socket.emit('user_connected', { nickname: 'Zadkine'});
-			});
-
 			socket.on('error', function() {
 				console.log('The connection has failed.');
 			});
 
+			socket.on('waiting_message', function(data) {
+				console.log(data);
+			})
+
 			$(document).ready(function () {
 				$("#okbutton").click(function () {
-					socket.emit('test', { data: $("#input").val() });
+					socket.emit('username_input', { Username: $("#input").val() });
 				});
 			});
 		</script>
@@ -24,8 +24,9 @@
 
 	<body>
 		<form action="" method="post">
+			Put in your username
 			<input type="text" name="input" id="input" /><br />
-			<img src="http://www.todayifoundout.com/wp-content/uploads/2010/04/ok.gif" id="okbutton" />
+			<img src="http://www.timnowackphotography.com/t/okButton.png" id="okbutton" />
 		</form>
 	</body>
 </html>
