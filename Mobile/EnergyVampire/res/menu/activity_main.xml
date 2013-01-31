@@ -6,5 +6,6 @@
         android:showAsAction="never"
         android:title="GPS"/>
     <item android:id="@+id/Chat" android:title="Chat"></item>
+    <item android:id="@+id/Cred" android:title="Credits"></item>
 
 </menu>
