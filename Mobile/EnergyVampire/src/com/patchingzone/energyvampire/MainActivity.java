@@ -1,32 +1,19 @@
 package com.patchingzone.energyvampire;
 
-import java.io.BufferedReader;
-import java.io.Console;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.net.UnknownHostException;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Random;
 
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.Settings;
-import android.animation.ArgbEvaluator;
-import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.TransitionDrawable;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,9 +21,7 @@ import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
-import android.webkit.ConsoleMessage;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -203,9 +188,6 @@ public class MainActivity extends Activity {
 		     }
 
 		     public void onFinish() {
-		    	 int Min = 1;
-		    	 int Max = 4;
-		    	 int rndNum = (int) (Math.random() * ( Max - Min ));
 		         Color(4);
 		     }
 		  }.start();

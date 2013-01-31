@@ -1,6 +1,5 @@
 package com.patchingzone.energyvampire;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 public class Credits extends BaseWebview {

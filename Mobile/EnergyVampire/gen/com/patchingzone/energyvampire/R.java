@@ -17,20 +17,20 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int Chat=0x7f08000c;
-        public static final int Count=0x7f080008;
-        public static final int Cred=0x7f08000d;
-        public static final int GPS=0x7f08000b;
-        public static final int body=0x7f080000;
-        public static final int body1=0x7f080004;
-        public static final int btnSend=0x7f080002;
-        public static final int button1=0x7f080007;
-        public static final int linearLayout1=0x7f080005;
-        public static final int svChat=0x7f080001;
-        public static final int textView1=0x7f080006;
-        public static final int textView2=0x7f080009;
-        public static final int tvChat=0x7f080003;
-        public static final int webView1=0x7f08000a;
+        public static final int Chat=0x7f09000c;
+        public static final int Count=0x7f090008;
+        public static final int Cred=0x7f09000d;
+        public static final int GPS=0x7f09000b;
+        public static final int body=0x7f090000;
+        public static final int body1=0x7f090004;
+        public static final int btnSend=0x7f090002;
+        public static final int button1=0x7f090007;
+        public static final int linearLayout1=0x7f090005;
+        public static final int svChat=0x7f090001;
+        public static final int textView1=0x7f090006;
+        public static final int textView2=0x7f090009;
+        public static final int tvChat=0x7f090003;
+        public static final int webView1=0x7f09000a;
     }
     public static final class layout {
         public static final int activity_chat=0x7f030000;
@@ -38,13 +38,18 @@ public final class R {
         public static final int webview=0x7f030002;
     }
     public static final class menu {
-        public static final int activity_main=0x7f070000;
+        public static final int activity_main=0x7f080000;
+    }
+    public static final class raw {
+        public static final int laser=0x7f050000;
+        public static final int sound1=0x7f050001;
+        public static final int sound2=0x7f050002;
     }
     public static final class string {
-        public static final int BT_Home=0x7f050003;
-        public static final int app_name=0x7f050000;
-        public static final int hello_world=0x7f050001;
-        public static final int menu_settings=0x7f050002;
+        public static final int BT_Home=0x7f060003;
+        public static final int app_name=0x7f060000;
+        public static final int hello_world=0x7f060001;
+        public static final int menu_settings=0x7f060002;
     }
     public static final class style {
         /** 
@@ -68,10 +73,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f070001;
     }
 }

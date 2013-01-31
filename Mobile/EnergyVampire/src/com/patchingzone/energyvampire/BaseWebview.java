@@ -1,21 +1,21 @@
 package com.patchingzone.energyvampire;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class BaseWebview extends Activity {
 
 	private WebView webView;
 	final Handler myHandler = new Handler();
 	/** Called when the activity is first created. */
+	@SuppressLint("SetJavaScriptEnabled")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
@@ -46,7 +46,6 @@ public class BaseWebview extends Activity {
 		final JavaScriptInterface myJavaScriptInterface = new JavaScriptInterface(this);    	 
     	 
         webView.getSettings().setLightTouchEnabled(true);
-        webView.getSettings().setJavaScriptEnabled(true);
         webView.addJavascriptInterface(myJavaScriptInterface, "AndroidFunction");
 	}
 	
@@ -63,6 +62,7 @@ public class BaseWebview extends Activity {
     	} 
     }
 	
+
 	public void SetPage(String Url)
 	{
 		webView.loadUrl(Url);
