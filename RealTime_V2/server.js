@@ -5,33 +5,24 @@ var app = require('express')()
 var player = require('./Player'),
 	players = [];
 
-chatClients = new Object();
+var users = {};
 
 server.listen(2525);
 
 io.set('log level', 3);
 
 io.sockets.on('connection', function(socket) {
-	socket.on('updateServer', function(data){
-		console.log(data);
-	});
-	socket.on('qq', function(data){
-		console.log(data);
-	});
-	socket.on('onmessage', function(data){
-		console.log(data);
-	});
-	socket.on('messages', function(data){
-		console.log(data);
-	});
-	socket.on('anything', function(data){
-		console.log(data);
-	});
-	socket.on('username_input', function(data) {
-		connect(socket, data);
+	socket.on('send_broadcast', function(data) {
+		socket.broadcast.emit('User connected', { Message : "Hi mobile phone. I can tell you a little secret: Henny is gay." });
 	});
 
-	socket.broadcast.emit('User connected', { Message: "User is connected" });
+	socket.addListener('Test', function(data){
+		console.log(data);
+	});
+
+	socket.on('message', function(data){
+		console.log(data);
+	});
 
 	var gamestate = require('./gamestate');
 	if(gamestate.state == gamestate.SERVER_START){

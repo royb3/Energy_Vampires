@@ -16,7 +16,7 @@
 
 			$(document).ready(function () {
 				$("#okbutton").click(function () {
-					socket.emit('username_input', { Username: $("#input").val() });
+					socket.emit('send_broadcast', { Message: "Ik heb nu op de knop gedrukt." });
 				});
 			});
 		</script>
@@ -24,8 +24,6 @@
 
 	<body>
 		<form action="" method="post">
-			Put in your username
-			<input type="text" name="input" id="input" /><br />
 			<img src="http://www.timnowackphotography.com/t/okButton.png" id="okbutton" />
 		</form>
 	</body>
