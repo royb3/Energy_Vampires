@@ -8,6 +8,7 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.AudioManager;
 import android.media.SoundPool;
 import android.opengl.Visibility;
 import android.os.Bundle;
@@ -37,7 +38,10 @@ public class MainActivity extends Activity {
 	private Boolean ConnectOk = false;
 	private RelativeLayout body;
 	private Animation fade;
-	private SoundPool soundPool;
+	
+	private SoundPool sp;
+	private int sound;
+	private int sound2;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +50,16 @@ public class MainActivity extends Activity {
 		
 		this.info = (TextView) this.findViewById(R.id.textView1);
 		this.count = (TextView) this.findViewById(R.id.Count);
-		this.body = (RelativeLayout) this.findViewById(R.id.body);
-		//button 1 
+		this.GPS = (TextView) this.findViewById(R.id.textView2);
+		this.body = (RelativeLayout) this.findViewById(R.id.body); 
 		this.BT_home = (Button) this.findViewById(R.id.button1);
-		this.GPS = (TextView) this.findViewById(R.id.textView2); 
+ 
 		fade = AnimationUtils.loadAnimation(this, R.anim.fade);
+		
+		//soundpool
+		sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+		sound = sp.load(this, R.raw.sound1, 1);
+		sound2 = sp.load(this, R.raw.sound2, 1);
 		
 		this.BT_home.setOnClickListener(new OnClickListener() {
 			
@@ -157,13 +166,13 @@ public class MainActivity extends Activity {
 
 		     public void onTick(long millisUntilFinished) {
 		         count.setText("" + millisUntilFinished / 1000);
-		         if(millisUntilFinished / 1000 < 1)
+		         
+		         if(millisUntilFinished /1000 == 1)
 		         {
-		        	 
-		         }
-		         else if(millisUntilFinished /1000 == 1)
+		        	 sp.play(sound2, 1, 1, 0, 0, 1);
+		         }else
 		         {
-		        	 
+		        	 sp.play(sound, 1, 1, 0, 0, 1);
 		         }
 		     }
 
