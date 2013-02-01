@@ -8,6 +8,11 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+<<<<<<< HEAD
+=======
+import android.media.SoundPool;
+import android.opengl.Visibility;
+>>>>>>> Established connection with the server.
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.Settings;
@@ -35,6 +40,7 @@ public class MainActivity extends Activity {
 	private Boolean ConnectOk = false;
 	private RelativeLayout body;
 	private Animation fade;
+	private SoundPool soundPool;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
