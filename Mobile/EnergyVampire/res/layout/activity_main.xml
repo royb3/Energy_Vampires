@@ -1,10 +1,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/body"
+    android:id="@+id/body1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000"
     tools:context=".MainActivity" >
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/body"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+     >
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -63,4 +71,5 @@
         android:layout_marginBottom="35dp"
         android:text="GPS DATA \nShows Here" />
 
+</RelativeLayout>
 </RelativeLayout>
