@@ -32,8 +32,10 @@ public class Chat extends Activity {
 	private Context c;
 	private EditText etChat;
 	private String address = "ws://192.168.8.74:2525";
+	
+	public String[] testString = {"1","5","6844165165414168"};
 
-	IOSocket ioWebSocket;
+	public static IOSocket ioWebSocket;
 	MessageCallback callback;
 	IOMessage msg;
 	IOWebSocket sok;
@@ -85,41 +87,10 @@ public class Chat extends Activity {
 			}
 
 			public void onEvent(String message) {
+					JsonParser.Parse(message);
+					JsonParser.SendMessage("Hello Thijs.");
+					JsonParser.SendJsonMessage("Test",testString);
 
-				try {
-					JSONObject jsonObject = new JSONObject(message);
-					JSONArray jsonArray = jsonObject.getJSONArray("args");
-					JSONObject jsonObject2 = jsonArray.getJSONObject(0);
-					Log.d("Chat", "JSON object " + jsonObject2.toString());
-					// xR = jsonObject2.getInt("x");
-					// yR = jsonObject2.getInt("y");
-					
-					//first we get message type
-					String gotMsg = jsonObject2.getString("Message");
-				
-					//depeding on message type then I parse this or that 
-					
-					
-					ioWebSocket.getWebSocket().sendMessage("Hello World");
-					// ioWebSocket.getWebSocket().sendMessage("this is a test");
-					String messageToSend = "{\"name\":\"updateServer\",\"args\":[{\"x\":1058,\"y\":49}]}";
-					ioWebSocket.getWebSocket().SendMessage(
-							new IOMessage(IOMessage.EVENT, -1, "", messageToSend));
-
-					// ioWebSocket.getWebSocket().sendMessage("Hello world!");
-
-					Log.d("Chat", "The message is " + gotMsg);
-
-				} catch (JSONException e) {
-
-					// TODO Auto-generated catch block
-
-					e.printStackTrace();
-
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			}
 
 		};
