@@ -10,4 +10,5 @@ var state = SERVER_START;
 switch(state){
 	case SERVER_START:
 	break;
+	case GAME_READY:
 };
