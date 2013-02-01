@@ -1,0 +1,9 @@
+{
+	"clientId" : "xxxxx",
+	"destination" : {
+		"clientId" : "xxxxx",
+		"broadcast" : false,
+	},
+	
+	"message" : "Bla Bla Bla"
+}

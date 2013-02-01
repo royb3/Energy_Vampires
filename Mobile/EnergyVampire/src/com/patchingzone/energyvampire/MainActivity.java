@@ -1,37 +1,32 @@
 package com.patchingzone.energyvampire;
 
-import java.io.BufferedReader;
-import java.io.Console;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.Random;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+<<<<<<< HEAD
+=======
+import android.media.SoundPool;
 import android.opengl.Visibility;
+>>>>>>> Established connection with the server.
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.Settings;
-import android.animation.ArgbEvaluator;
-import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.TransitionDrawable;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.webkit.ConsoleMessage;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +39,8 @@ public class MainActivity extends Activity {
 	private TextView GPS;
 	private Boolean ConnectOk = false;
 	private RelativeLayout body;
+	private Animation fade;
+	private SoundPool soundPool;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +53,7 @@ public class MainActivity extends Activity {
 		//button 1 
 		this.BT_home = (Button) this.findViewById(R.id.button1);
 		this.GPS = (TextView) this.findViewById(R.id.textView2); 
+		fade = AnimationUtils.loadAnimation(this, R.anim.fade);
 		
 		this.BT_home.setOnClickListener(new OnClickListener() {
 			
@@ -79,7 +77,7 @@ public class MainActivity extends Activity {
 	    // Handle item selection
 	    switch (item.getItemId()) {
 	        case R.id.GPS:
-	        	Log.e("gps", "start");
+	        	//Log.e("gps", "start");
 	        	GPS.setVisibility(View.VISIBLE);
 	        	LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);	        	
 	        	LocationManager locationManager;
@@ -115,11 +113,15 @@ public class MainActivity extends Activity {
 					@Override
 					public void onLocationChanged(Location location) {
 						// TODO Auto-generated method stub
-						Log.e("Lat", ""+location.getLatitude());
-			        	Log.e("long", ""+location.getLongitude());
-			        	Log.e("acc", ""+location.getAccuracy());
-			        	Log.e("alt", ""+location.getAltitude());
-			        	GPS.setText("lat"+location.getLatitude()+" \nLong"+location.getLongitude()+" \nAcc"+location.getAccuracy());
+						Date df = new java.util.Date(location.getTime());
+						String vv = new SimpleDateFormat("dd-MM-yyyy , HH:mm:ss").format(df);
+						
+						
+					GPS.setText("lat___:"+location.getLatitude()+
+			        			" \nLong__:"+location.getLongitude()+
+			        			" \nAcc___:"+location.getAccuracy()+
+			        			" \nTime__:"+vv+
+			        			" \nHead__:"+location.getBearing());
 					}
 				});
 	        	
@@ -127,6 +129,10 @@ public class MainActivity extends Activity {
 	        case R.id.Chat:
 	        	Intent sec=new Intent(MainActivity.this,Chat.class);
                 startActivity(sec);
+	        	return true;
+	        case R.id.Cred:
+	        	Intent cred =new Intent(MainActivity.this,Credits.class);
+                startActivity(cred);
 	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
@@ -138,29 +144,6 @@ public class MainActivity extends Activity {
 		Toast toast = Toast.makeText(getApplicationContext(), "Connecting", Toast.LENGTH_SHORT);
 		toast.show();
 		
-		/*
-		 try {
-	            Socket s = new Socket("10.250.89.28", 80);	            //outgoing stream redirect to socket
-	            OutputStream out = s.getOutputStream();
-	            PrintWriter output = new PrintWriter(out);
-	            output.println("Hello Android!");
-	            BufferedReader input = new BufferedReader(new InputStreamReader(s.getInputStream()));
-	            //read line(s)
-	            String st = input.readLine();
-	            //Close connection
-	            s.close();
-				Log.e("con", "ok" + st + ": "+ input);
-	    } catch (UnknownHostException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	            Log.e("con", "f1");
-
-	    } catch (IOException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	            Log.e("con", "f2" + e );
-	    }
-*/
 		info.setText("Click I'm Ready if your ready.");
 		BT_home.setText("I'm Ready");
 		
@@ -188,10 +171,7 @@ public class MainActivity extends Activity {
 		     }
 
 		     public void onFinish() {
-		    	 int Min = 1;
-		    	 int Max = 4;
-		    	 int rndNum = (int) (Math.random() * ( Max - Min ));
-		         Color(3);
+		         Color(4);
 		     }
 		  }.start();
 	}
@@ -199,37 +179,41 @@ public class MainActivity extends Activity {
 	public void  Color(final int color)
 	{
 		count.setVisibility(View.GONE);
-		
-		// 20 = 5.10 sec
-		// 10 = 2.55 sec
-		final int multi = 20;
-		new CountDownTimer((255 * multi), 1) {
-
+   	 	  
+    	 body.startAnimation(fade);
 			
-		     public void onTick(long millisUntilFinished) 
-		     {		    	 
-		    	 switch(color)
-		    	 {
-	    	 		case 1:
-	    	 			body.setBackgroundColor(android.graphics.Color.rgb(((int)millisUntilFinished / multi),0,0)); 
-		    		break;
-	    	 		case 2:
-	    	 			body.setBackgroundColor(android.graphics.Color.rgb(0,((int)millisUntilFinished / multi),0)); 
-    	 			break;
-	    	 		case 3:
-	    	 			body.setBackgroundColor(android.graphics.Color.rgb(0,0,((int)millisUntilFinished / multi))); 
-    	 			break;
-	    	 		case 4:
-	    	 			body.setBackgroundColor(android.graphics.Color.rgb(((int)millisUntilFinished / multi),0,((int)millisUntilFinished / multi))); 
-    	 			break;
-		    	 }		         
-		     }
-
-		     public void onFinish() {
-		         
-		     }
-		  }.start(); 
+			 fade.setAnimationListener(new AnimationListener() {
+                public void onAnimationStart(Animation anim)
+                {
+                	switch(color)
+               	 	{
+           	 		case 1:
+           	 			body.setBackgroundColor(android.graphics.Color.BLUE);
+           	   		break;
+           	 		case 2:
+           	 			body.setBackgroundColor(android.graphics.Color.GREEN);
+            			break;
+           	 		case 3:
+           	 			body.setBackgroundColor(android.graphics.Color.RED);
+            			break;
+           	 		case 4:
+           	 			body.setBackgroundColor(android.graphics.Color.YELLOW);
+            			break;
+               	 	}	
+                };
+                public void onAnimationRepeat(Animation anim)
+                {
+                };
+                public void onAnimationEnd(Animation anim)
+                {
+                    //body.setVisibility(View.GONE);
+                    body.setBackgroundColor(android.graphics.Color.BLACK);
+                };     
+            });     
+    
 	}
+	
+	
 	
 	
 	@Override

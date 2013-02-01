@@ -1,0 +1,17 @@
+{	"gameState" :
+	{
+		"minPlayers": 0,
+		"players" : ["player1", "player2", "player3", "enz"],
+		"maxPlayers": 10,
+
+		"gameTime": 0
+	},
+
+	"gameName" : "name of the game",
+	"version" : "1.0",
+	"clientType" : {
+		"vendor" : "",
+		"model" : "",
+		"hasCamera" : true
+	}
+}

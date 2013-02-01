@@ -1,0 +1,17 @@
+{
+	"authorization" : {
+		"player" : {
+			"clientId" : "xxxxx",
+			"username" : "",
+			"password" : "",
+			"nickname" : ""
+		},
+
+		"clientType" : {
+			"vendor" : "",
+			"model" : "",
+			"hasCamera" : true
+		},
+
+	}
+}
