@@ -144,29 +144,6 @@ public class MainActivity extends Activity {
 		Toast toast = Toast.makeText(getApplicationContext(), "Connecting", Toast.LENGTH_SHORT);
 		toast.show();
 		
-		/*
-		 try {
-	            Socket s = new Socket("10.250.89.28", 80);	            //outgoing stream redirect to socket
-	            OutputStream out = s.getOutputStream();
-	            PrintWriter output = new PrintWriter(out);
-	            output.println("Hello Android!");
-	            BufferedReader input = new BufferedReader(new InputStreamReader(s.getInputStream()));
-	            //read line(s)
-	            String st = input.readLine();
-	            //Close connection
-	            s.close();
-				Log.e("con", "ok" + st + ": "+ input);
-	    } catch (UnknownHostException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	            Log.e("con", "f1");
-
-	    } catch (IOException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	            Log.e("con", "f2" + e );
-	    }
-*/
 		info.setText("Click I'm Ready if your ready.");
 		BT_home.setText("I'm Ready");
 		

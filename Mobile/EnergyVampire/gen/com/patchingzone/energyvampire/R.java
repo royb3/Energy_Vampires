@@ -27,6 +27,7 @@ public final class R {
         public static final int btnSend=0x7f090002;
         public static final int button1=0x7f090007;
         public static final int linearLayout1=0x7f090005;
+        public static final int opt1=0x7f09000e;
         public static final int svChat=0x7f090001;
         public static final int textView1=0x7f090006;
         public static final int textView2=0x7f090009;
@@ -54,11 +55,11 @@ public final class R {
     }
     public static final class menu {
         public static final int activity_main=0x7f080000;
+        public static final int creditmenu=0x7f080001;
     }
     public static final class raw {
         public static final int laser=0x7f050000;
-        public static final int sound1=0x7f050001;
-        public static final int sound2=0x7f050002;
+        public static final int sound2=0x7f050001;
     }
     public static final class string {
         public static final int BT_Home=0x7f060003;
