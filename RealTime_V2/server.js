@@ -1,19 +1,25 @@
-var app = require('express')()
-	, server = require('http').createServer(app)
-	, io = require('socket.io').listen(server);
+var express = require('express'),
+	app = express(),
+	server = require('http').createServer(app),
+	io = require('socket.io').listen(server);
 
-var player = require('./Player'),
-	players = [];
+var Player = require('./Player.js'),
+	players = [],
+	Gamestate = require('./gamestate.js');
 
-var users = {};
+
+
 
 server.listen(2525);
 
-io.set('log level', 3);
+var gamestate = new Gamestate.Gamestate(0);
+
+io.set('log level', 2);
 
 io.sockets.on('connection', function(socket) {
+
 	socket.on('send_broadcast', function(data) {
-		socket.broadcast.emit('User connected', { Message : "Hi mobile phone. I can tell you a little secret: Henny is gay." });
+		socket.broadcast.emit('send_broadcast', { message : data.message });
 	});
 
 	socket.addListener('Test', function(data){
@@ -24,27 +30,27 @@ io.sockets.on('connection', function(socket) {
 		console.log(data);
 	});
 
-	var gamestate = require('./gamestate');
-	if(gamestate.state == gamestate.SERVER_START){
+	
+
+	if(gamestate.state == gamestate.gamestates.SERVER_START){
+
 	}
-	else{
+	else {
 		socket.emit('waiting_message', { Message: 'Wait for the next game.' });
 	}
 });
 
-function connect(socket, data){
-	data.ClientID = generateID();
+function PlayerJoinGame (socket) {
+		var id = generateID(),
+		nickname = "player" + id;
+		newPlayer = new Player.Player(id, nickname, 100, );
+	}	
 
-	chatClients[socket.id] = data;
-
-	console.log(data);
+function GenerateRandomTeam(){
+	var 
+	return Math.floor((Math.random()*)
 }
 
 function generateID(){
-  var S4 = function () {
-    return (((1 + Math.random()) * 0x100000) |
-      0).toString(16).substring(1);
-  };
-
-  return (S4() + S4());
+	return players.length;
 }
