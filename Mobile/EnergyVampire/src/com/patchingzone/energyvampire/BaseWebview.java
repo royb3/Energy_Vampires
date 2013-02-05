@@ -14,6 +14,7 @@ public class BaseWebview extends Activity {
 
 	private WebView webView;
 	final Handler myHandler = new Handler();
+	private JavaScriptInterface myJavaScriptInterface = new JavaScriptInterface(this);    
 	/** Called when the activity is first created. */
 	@SuppressLint("SetJavaScriptEnabled")
 	@Override
@@ -42,9 +43,7 @@ public class BaseWebview extends Activity {
 		    	
 		    }
 		 });
-		
-		final JavaScriptInterface myJavaScriptInterface = new JavaScriptInterface(this);    	 
-    	 
+		 
         webView.getSettings().setLightTouchEnabled(true);
         webView.addJavascriptInterface(myJavaScriptInterface, "AndroidFunction");
 	}

@@ -1,4 +1,5 @@
 // Gamestate info
+
 var gamestate = function(state){
 	this.gamestates = {SERVER_START : 0
 	, GAME_READY : 1
@@ -10,7 +11,5 @@ var gamestate = function(state){
 
 }
 	
-
-
-
 exports.gamestate = gamestate;
+

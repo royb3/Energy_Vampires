@@ -141,9 +141,12 @@ public abstract class WebSocketClient implements Runnable, WebSocketListener {
 	 */
 	public void send(String text) throws IOException {
 
-		Log.d("qq", text); 
+		Log.d("WebSocketClient", "sending text: " + text); 
 		if (conn != null) {
 			conn.send(text);
+			Log.d("WebSocketClient", "sent text: " + text); 
+		} else { 
+			Log.d("WebSocketClient", "NOT sent text: " + text); 
 		}
 	}
 

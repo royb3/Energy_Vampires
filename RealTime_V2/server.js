@@ -2,17 +2,26 @@ var app = require('express')()
 	, server = require('http').createServer(app)
 	, io = require('socket.io').listen(server);
 
-var player = require('./Player');
+var player = require('./Player'),
+	players = [];
 
-chatClients = new Object();
+var users = {};
 
-server.listen(80);
+server.listen(2525);
 
 io.set('log level', 3);
 
 io.sockets.on('connection', function(socket) {
-	socket.on('username_input', function(data) {
-		connect(socket, data);
+	socket.on('send_broadcast', function(data) {
+		socket.broadcast.emit('User connected', { Message : "Hi mobile phone. I can tell you a little secret: Henny is gay." });
+	});
+
+	socket.addListener('Test', function(data){
+		console.log(data);
+	});
+
+	socket.on('message', function(data){
+		console.log(data);
 	});
 
 	var gamestate = require('./gamestate');
