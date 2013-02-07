@@ -124,22 +124,27 @@ public class MainActivity extends Activity {
 		Toast toast = Toast.makeText(getApplicationContext(), "Starting", Toast.LENGTH_SHORT);
 		toast.show();
 		count.setVisibility(View.VISIBLE);
-		new CountDownTimer(10999, 1000) {
+		new CountDownTimer(10000, 100) {
+		int secondsLeft = 10; 
 
 		     public void onTick(long millisUntilFinished) {
-		         count.setText("" + millisUntilFinished / 1000);
-		         
-		         if(millisUntilFinished /1000 == 1)
-		         {
-		        	 sp.play(sound2, 1, 1, 0, 0, 1);
-		         }else
-		         {
-		        	 sp.play(sound, 1, 1, 0, 0, 1);
+		    	 
+		    	 if (Math.round((float)millisUntilFinished / 1000.0f) != secondsLeft)
+		         {  
+		             secondsLeft = Math.round((float)millisUntilFinished / 1000.0f);
+		             count.setText("" +secondsLeft );
+		             sp.play(sound, 1, 1, 0, 0, 1);
 		         }
+		         //count.setText("" + ((millisUntilFinished / 1000)));
+		         
+		         
+		         
 		     }
 
 		     public void onFinish() {
-		         Color(4);
+		    	 sp.play(sound2, 1, 1, 0, 0, 1);
+		    	 Color(4);
+		         
 		     }
 		  }.start();
 	}

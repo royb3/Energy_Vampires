@@ -29,7 +29,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Chat"></activity>
+        <activity android:name=".Chat"
+            android:screenOrientation="portrait" ></activity>
         <activity android:name="BaseWebview"></activity>
         <activity android:name="Credits"></activity>
     </application>
