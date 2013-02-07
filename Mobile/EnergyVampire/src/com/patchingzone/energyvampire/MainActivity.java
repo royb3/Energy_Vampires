@@ -127,18 +127,13 @@ public class MainActivity extends Activity {
 		new CountDownTimer(10000, 100) {
 		int secondsLeft = 10; 
 
-		     public void onTick(long millisUntilFinished) {
-		    	 
-		    	 if (Math.round((float)millisUntilFinished / 1000.0f) != secondsLeft)
+	      	public void onTick(long millisUntilFinished) {
+	    	 	if (Math.round((float)millisUntilFinished / 1000.0f) != secondsLeft)
 		         {  
 		             secondsLeft = Math.round((float)millisUntilFinished / 1000.0f);
 		             count.setText("" +secondsLeft );
 		             sp.play(sound, 1, 1, 0, 0, 1);
 		         }
-		         //count.setText("" + ((millisUntilFinished / 1000)));
-		         
-		         
-		         
 		     }
 
 		     public void onFinish() {
