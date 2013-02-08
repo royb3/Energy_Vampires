@@ -1,6 +1,0 @@
-{
-	"announces" : {
-		"type" : "", // For example: 'player joined the game', 'new version available', 'game is starting'.
-		"message" : ""
-	}, 
-}
