@@ -28,8 +28,8 @@ public class JsonParser {
 	
 	public static void SendJsonMessage(String Name,String[] Values)
 	{	
-		
-		String messageToSend = "{\"name\":"  + Name + ",\"args\":[{";
+		/*
+		String messageToSend = "{\"name\":\""  + Name + "\",\"args\":[{";
 		for(String value : Values)
 		{
 			if(value == Values[0])
@@ -50,10 +50,12 @@ public class JsonParser {
 					new IOMessage(IOMessage.EVENT, -1, "", messageToSend));
 		} catch (IOException e) {
 			Log.e("JSON","cant send JSON message" + e);
-		}
+		}*/
+		
+		//Chat.ioWebSocket.emit(new JSONObject().put("name", Name).put("args",Values));
 	}
 	
-	public static void Parse(String Message)
+	public static String Parse(String Message)
 	{
 		try{
 		JSONObject jsonObject = new JSONObject(Message);
@@ -64,11 +66,13 @@ public class JsonParser {
 		String gotMsg = jsonObject2.getString("message");
 		
 		Log.d("Chat", "The message is " + gotMsg);
+		return gotMsg;
 		
 		}
 		catch(JSONException Jex)
 		{
 			Log.d("error", "Message not parsed " + Jex);
+			return Jex.toString();
 		}
 	}
 }

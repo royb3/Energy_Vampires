@@ -25,7 +25,7 @@ public class Chat extends Activity {
 	private EditText etChat;
 	private String address = "ws://192.168.8.74:2525";
 	
-	public String[] testString = {"1","5","6844165165414168"};
+	public String[] testString = {"message\" : \"test nr 2"};
 
 	public static IOSocket ioWebSocket;
 	MessageCallback callback;
@@ -87,7 +87,6 @@ public class Chat extends Activity {
 					JsonParser.Parse(message);
 					JsonParser.SendMessage("Hello Thijs.");
 					JsonParser.SendJsonMessage("Test",testString);
-
 			}
 
 		};
