@@ -16,7 +16,7 @@
 
 			$(document).ready(function () {
 				$("#okbutton").click(function () {
-					socket.emit('send_broadcast', { Message: "Ik heb nu op de knop gedrukt." });
+					socket.emit('send_broadcast', { message: "Ik heb nu op de knop gedrukt." });
 				});
 			});
 		</script>
