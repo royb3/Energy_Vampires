@@ -181,13 +181,15 @@ public abstract class WebSocketServer implements Runnable, WebSocketListener {
     return this.port;
   }
 
-  public WebSocketDraft getDraft() {
+  @Override
+public WebSocketDraft getDraft() {
     return this.draft;
   }
 
 
   // Runnable IMPLEMENTATION /////////////////////////////////////////////////
-  public void run() {
+  @Override
+public void run() {
     try {
       server = ServerSocketChannel.open();
       server.configureBlocking(false);
@@ -293,7 +295,8 @@ public abstract class WebSocketServer implements Runnable, WebSocketListener {
    * @throws IOException When socket related I/O errors occur.
    * @throws NoSuchAlgorithmException 
    */
-  public boolean onHandshakeRecieved(WebSocket conn, String handshake, byte[] key3) throws IOException, NoSuchAlgorithmException {
+  @Override
+public boolean onHandshakeRecieved(WebSocket conn, String handshake, byte[] key3) throws IOException, NoSuchAlgorithmException {
     
     // If a Flash client requested the Policy File...
     if (FLASH_POLICY_REQUEST.equals(handshake)) {
@@ -399,17 +402,20 @@ public abstract class WebSocketServer implements Runnable, WebSocketListener {
     return false;
   }
 
-  public void onMessage(WebSocket conn, String message) {
+  @Override
+public void onMessage(WebSocket conn, String message) {
     onClientMessage(conn, message);
   }
 
-  public void onOpen(WebSocket conn) {
+  @Override
+public void onOpen(WebSocket conn) {
     if (this.connections.add(conn)) {
       onClientOpen(conn);
     }
   }
 
-  public void onClose(WebSocket conn) {
+  @Override
+public void onClose(WebSocket conn) {
     if (this.connections.remove(conn)) {
       onClientClose(conn);
     }
@@ -431,6 +437,7 @@ public abstract class WebSocketServer implements Runnable, WebSocketListener {
   public abstract void onClientOpen(WebSocket conn);
   public abstract void onClientClose(WebSocket conn);
   public abstract void onClientMessage(WebSocket conn, String message);
-  public abstract void onIOError(IOException ex);
+  @Override
+public abstract void onIOError(IOException ex);
 
 }

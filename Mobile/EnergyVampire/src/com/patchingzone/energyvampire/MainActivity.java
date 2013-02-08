@@ -7,7 +7,6 @@ import java.util.Date;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-import android.hardware.SensorListener;
 import android.hardware.SensorManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -15,7 +14,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.AudioManager;
 import android.media.SoundPool;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.Settings;
@@ -86,6 +84,7 @@ public class MainActivity extends Activity {
 				
 	}
 		
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle item selection
 	    switch (item.getItemId()) {
@@ -101,6 +100,10 @@ public class MainActivity extends Activity {
 	        case R.id.Cred:
 	        	Intent cred =new Intent(MainActivity.this,Credits.class);
                 startActivity(cred);
+	        	return true;
+	        case R.id.Prefence:
+	        	Intent Pref =new Intent(MainActivity.this, com.patchingzone.energyvampire.Settings.class);
+	        	startActivity(Pref);
 	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
@@ -126,7 +129,8 @@ public class MainActivity extends Activity {
 		count.setVisibility(View.VISIBLE);
 		new CountDownTimer(10999, 1000) {
 
-		     public void onTick(long millisUntilFinished) {
+		     @Override
+			public void onTick(long millisUntilFinished) {
 		         count.setText("" + millisUntilFinished / 1000);
 		         
 		         if(millisUntilFinished /1000 == 1)
@@ -138,7 +142,8 @@ public class MainActivity extends Activity {
 		         }
 		     }
 
-		     public void onFinish() {
+		     @Override
+			public void onFinish() {
 		         Color(4);
 		     }
 		  }.start();
@@ -151,7 +156,8 @@ public class MainActivity extends Activity {
     	 body.startAnimation(fade);
 			
 			 fade.setAnimationListener(new AnimationListener() {
-                public void onAnimationStart(Animation anim)
+                @Override
+				public void onAnimationStart(Animation anim)
                 {
                 	switch(color)
                	 	{
@@ -169,10 +175,12 @@ public class MainActivity extends Activity {
             			break;
                	 	}	
                 };
-                public void onAnimationRepeat(Animation anim)
+                @Override
+				public void onAnimationRepeat(Animation anim)
                 {
                 };
-                public void onAnimationEnd(Animation anim)
+                @Override
+				public void onAnimationEnd(Animation anim)
                 {
                     //body.setVisibility(View.GONE);
                     body.setBackgroundColor(android.graphics.Color.BLACK);
@@ -297,12 +305,14 @@ public class MainActivity extends Activity {
 	//End Compass Code
 	
 
+	@Override
 	protected void onResume()
 	{
 		super.onResume();
 		startCompass();
 	}
 	
+	@Override
 	protected void onPause()
 	{
 		super.onPause();

@@ -32,6 +32,7 @@
         <activity android:name=".Chat"></activity>
         <activity android:name="BaseWebview"></activity>
         <activity android:name="Credits"></activity>
+        <activity android:name="com.patchingzone.energyvampire.Settings"></activity>
     </application>
 
 </manifest>

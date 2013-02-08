@@ -2,9 +2,6 @@ package com.clwillingham.socket.io;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.Date;
-import java.util.Timer;
-
 import android.util.Log;
 
 import net.tootallnate.websocket.WebSocketClient;
