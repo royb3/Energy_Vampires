@@ -1,12 +1,6 @@
 package com.patchingzone.energyvampire;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.clwillingham.socket.io.IOMessage;
 import com.clwillingham.socket.io.IOSocket;
 import com.clwillingham.socket.io.IOWebSocket;
@@ -22,9 +16,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Chat extends Activity {
 
@@ -33,7 +25,7 @@ public class Chat extends Activity {
 	private EditText etChat;
 	private String address = "ws://192.168.8.74:2525";
 	
-	public String[] testString = {"1","5","6844165165414168"};
+	public String[] testString = {"message\" : \"test nr 2"};
 
 	public static IOSocket ioWebSocket;
 	MessageCallback callback;
@@ -62,6 +54,7 @@ public class Chat extends Activity {
 
 		this.btnSend.setOnClickListener(new OnClickListener() {
 
+			@Override
 			public void onClick(View v) {
 				LinearLayout ll = (LinearLayout) findViewById(R.id.ll);
 				TextView tv = new TextView(c);
@@ -77,20 +70,23 @@ public class Chat extends Activity {
 
 		callback = new MessageCallback() {
 
+			@Override
 			public void onOpen() {
 			}
 
+			@Override
 			public void onMessage(String message) {
 			}
 
+			@Override
 			public void on(String event, String data) {
 			}
 
+			@Override
 			public void onEvent(String message) {
 					JsonParser.Parse(message);
 					JsonParser.SendMessage("Hello Thijs.");
 					JsonParser.SendJsonMessage("Test",testString);
-
 			}
 
 		};

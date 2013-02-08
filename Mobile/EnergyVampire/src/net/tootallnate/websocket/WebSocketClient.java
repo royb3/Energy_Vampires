@@ -190,6 +190,7 @@ public abstract class WebSocketClient implements Runnable, WebSocketListener {
 	}
 
 	// Runnable IMPLEMENTATION /////////////////////////////////////////////////
+	@Override
 	public void run() {
 		running = tryToConnect(new InetSocketAddress(uri.getHost(), getPort()));
 
@@ -322,6 +323,7 @@ public abstract class WebSocketClient implements Runnable, WebSocketListener {
 	 *             When socket related I/O errors occur.
 	 * @throws NoSuchAlgorithmException
 	 */
+	@Override
 	public boolean onHandshakeRecieved(WebSocket conn, String handshake,
 			byte[] reply) throws IOException, NoSuchAlgorithmException {
 		// TODO: Do some parsing of the returned handshake, and close connection
@@ -357,6 +359,7 @@ public abstract class WebSocketClient implements Runnable, WebSocketListener {
 	 * @param conn
 	 * @param message
 	 */
+	@Override
 	public void onMessage(WebSocket conn, String message) {
 		onMessage(message);
 	}
@@ -366,6 +369,7 @@ public abstract class WebSocketClient implements Runnable, WebSocketListener {
 	 * 
 	 * @param conn
 	 */
+	@Override
 	public void onOpen(WebSocket conn) {
 		onOpen();
 	}
@@ -375,6 +379,7 @@ public abstract class WebSocketClient implements Runnable, WebSocketListener {
 	 * 
 	 * @param conn
 	 */
+	@Override
 	public void onClose(WebSocket conn) {
 		if (running) {
 			onClose();
@@ -400,5 +405,6 @@ public abstract class WebSocketClient implements Runnable, WebSocketListener {
 
 	public abstract void onClose();
 
+	@Override
 	public abstract void onIOError(IOException ex);
 }
