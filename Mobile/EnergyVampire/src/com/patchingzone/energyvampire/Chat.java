@@ -18,12 +18,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class Chat extends Activity {
+public class Chat extends MainActivity {
 
 	private Button btnSend;
 	private Context c;
 	private EditText etChat;
 	private String address = "ws://192.168.8.74:2525";
+	//private String address = "ws://"+ app_preferences.getString("IP", "") +":"+ app_preferences.getString("port", "");
 	
 	public String[] testString = {"message\" : \"test nr 2"};
 
@@ -51,9 +52,11 @@ public class Chat extends Activity {
 		c = this;
 		this.btnSend = (Button) findViewById(R.id.btnSend);
 		this.etChat = (EditText) findViewById(R.id.etChat);
+		
+		address = "ws://"+ app_preferences.getString("IP", "") +":"+ app_preferences.getString("Port", "");
 
 		this.btnSend.setOnClickListener(new OnClickListener() {
-
+		
 			@Override
 			public void onClick(View v) {
 				LinearLayout ll = (LinearLayout) findViewById(R.id.ll);

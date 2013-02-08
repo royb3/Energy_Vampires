@@ -16,10 +16,12 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,6 +49,8 @@ public class MainActivity extends Activity {
 	private int sound;
 	private int sound2;
 	
+	SharedPreferences app_preferences;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -57,6 +61,8 @@ public class MainActivity extends Activity {
 		this.GPS = (TextView) this.findViewById(R.id.textView2);
 		this.body = (RelativeLayout) this.findViewById(R.id.body); 
 		this.BT_home = (Button) this.findViewById(R.id.button1);
+		
+		app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
  
 		fade = AnimationUtils.loadAnimation(this, R.anim.fade);
 		

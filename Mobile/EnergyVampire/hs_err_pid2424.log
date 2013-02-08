@@ -1,0 +1,107 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  Internal Error (javaClasses.cpp:129), pid=2424, tid=1688
+#  fatal error: Invalid layout of preloaded class
+#
+# JRE version: 7.0_10-b18
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (23.6-b04 mixed mode windows-amd64 compressed oops)
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.sun.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00000000022ed800):  JavaThread "Unknown thread" [_thread_in_vm, id=1688, stack(0x0000000001fa0000,0x00000000020a0000)]
+
+Stack: [0x0000000001fa0000,0x00000000020a0000]
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x00000000022ed800 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=1688, stack(0x0000000001fa0000,0x00000000020a0000)]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (10 events):
+Event: 0.122 loading class 0x0000000002151d40 done
+Event: 0.123 loading class 0x0000000002151b90 done
+Event: 0.123 loading class 0x0000000002151950
+Event: 0.123 loading class 0x000000000218efd0
+Event: 0.123 loading class 0x000000000218efd0 done
+Event: 0.123 loading class 0x000000000218f010
+Event: 0.123 loading class 0x000000000218f010 done
+Event: 0.123 loading class 0x000000000ac2e350
+Event: 0.123 loading class 0x000000000ac2e350 done
+Event: 0.123 loading class 0x0000000002151950 done
+
+
+Dynamic libraries:
+0x000007f600990000 - 0x000007f6009c3000 	C:\Program Files\Java\jre7\bin\javaw.exe
+0x000007fbee980000 - 0x000007fbeeb3e000 	C:\Windows\SYSTEM32\ntdll.dll
+0x000007fbee380000 - 0x000007fbee4b6000 	C:\Windows\system32\KERNEL32.DLL
+0x000007fbeb9b0000 - 0x000007fbebaa3000 	C:\Windows\system32\KERNELBASE.dll
+0x000007fbe6550000 - 0x000007fbe65ef000 	C:\Windows\system32\apphelp.dll
+0x000007fbed840000 - 0x000007fbed91e000 	C:\Windows\system32\ADVAPI32.dll
+0x000007fbed6f0000 - 0x000007fbed83c000 	C:\Windows\system32\USER32.dll
+0x000007fbe95b0000 - 0x000007fbe9819000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.9200.16384_none_418c2a697189c07f\COMCTL32.dll
+0x000007fbec0b0000 - 0x000007fbec155000 	C:\Windows\system32\msvcrt.dll
+0x000007fbeddd0000 - 0x000007fbede18000 	C:\Windows\SYSTEM32\sechost.dll
+0x000007fbed980000 - 0x000007fbedac0000 	C:\Windows\system32\RPCRT4.dll
+0x000007fbee840000 - 0x000007fbee980000 	C:\Windows\system32\GDI32.dll
+0x000007fbedee0000 - 0x000007fbedf19000 	C:\Windows\system32\IMM32.DLL
+0x000007fbee4c0000 - 0x000007fbee5d5000 	C:\Windows\system32\MSCTF.dll
+0x0000000076860000 - 0x0000000076931000 	C:\Program Files\Java\jre7\bin\msvcr100.dll
+0x0000000076140000 - 0x000000007685f000 	C:\Program Files\Java\jre7\bin\server\jvm.dll
+0x000007fbe8a40000 - 0x000007fbe8a49000 	C:\Windows\SYSTEM32\WSOCK32.dll
+0x000007fbe17e0000 - 0x000007fbe1800000 	C:\Windows\SYSTEM32\WINMM.dll
+0x000007fbed680000 - 0x000007fbed687000 	C:\Windows\system32\PSAPI.DLL
+0x000007fbed690000 - 0x000007fbed6e8000 	C:\Windows\system32\WS2_32.dll
+0x000007fbe0d70000 - 0x000007fbe0da2000 	C:\Windows\SYSTEM32\WINMMBASE.dll
+0x000007fbede20000 - 0x000007fbede29000 	C:\Windows\system32\NSI.dll
+0x0000000076130000 - 0x000000007613f000 	C:\Program Files\Java\jre7\bin\verify.dll
+0x0000000076100000 - 0x0000000076128000 	C:\Program Files\Java\jre7\bin\java.dll
+0x00000000760e0000 - 0x00000000760f5000 	C:\Program Files\Java\jre7\bin\zip.dll
+
+VM Arguments:
+jvm_args: -Dfile.encoding=Cp1252 -Xbootclasspath:C:\Program Files (x86)\android\sdk\platforms\android-17\android.jar 
+java_command: com.patchingzone.energyvampire.Chat
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+PATH=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files (x86)\Bitvise SSH Client;C:\Program Files\OpenVPN\bin;C:\Program Files\nodejs\;C:\Users\Vincent\AppData\Roaming\npm\
+USERNAME=Vincent
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=AMD64 Family 18 Model 1 Stepping 0, AuthenticAMD
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 8 , 64 bit Build 9200 
+
+CPU:total 4 (4 cores per cpu, 1 threads per core) family 18 model 1 stepping 0, cmov, cx8, fxsr, mmx, sse, sse2, sse3, popcnt, mmxext, 3dnowpref, lzcnt, sse4a, tsc, tscinvbit, tscinv
+
+Memory: 4k page, physical 7838580k(5595476k free), swap 15702900k(12848992k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (23.6-b04) for windows-amd64 JRE (1.7.0_10-b18), built on Nov 28 2012 05:00:40 by "java_re" with unknown MS VC++:1600
+
+time: Fri Feb 08 16:01:04 2013
+elapsed time: 0 seconds
+

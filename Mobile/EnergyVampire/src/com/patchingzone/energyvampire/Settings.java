@@ -10,11 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class Settings extends Activity {
+public class Settings extends MainActivity {
 	
 	EditText Server_IP, Server_Port, Phone_ID;
 	Button Set, Get;
-	private SharedPreferences app_preferences;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class Settings extends Activity {
 		Server_Port = (EditText) findViewById(R.id.Server_Port_textbox);
 		Phone_ID = (EditText) findViewById(R.id.Phone_ID_textbox);
 		Set = (Button) findViewById(R.id.Settings_save_bt);
-		app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
+		
 		
 		fillSettings();
 		
