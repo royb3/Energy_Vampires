@@ -26,7 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.80"
             android:ems="10"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            android:background="#000" />
 
     </LinearLayout>
 
@@ -49,7 +50,8 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="number"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            android:background="#000" />
 
     </LinearLayout>
 
@@ -71,7 +73,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            android:background="#000" />
 
     </LinearLayout>
 
