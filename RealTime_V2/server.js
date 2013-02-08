@@ -14,15 +14,16 @@ server.listen(2525);
 
 var gamestate = new Gamestate.Gamestate(0);
 
-io.set('log level', 2);
+io.set('log level', 3);
 
 io.sockets.on('connection', function(socket) {
 
 	socket.on('send_broadcast', function(data) {
 		socket.broadcast.emit('send_broadcast', { message : data.message });
+		console.log(data);
 	});
 
-	socket.addListener('Test', function(data){
+	socket.on('Test', function(data){
 		console.log(data);
 	});
 
@@ -43,12 +44,10 @@ io.sockets.on('connection', function(socket) {
 function PlayerJoinGame (socket) {
 		var id = generateID(),
 		nickname = "player" + id;
-		newPlayer = new Player.Player(id, nickname, 100, );
+		newPlayer = new Player.Player(id, nickname, 100);
 	}	
 
 function GenerateRandomTeam(){
-	var 
-	return Math.floor((Math.random()*)
 }
 
 function generateID(){
