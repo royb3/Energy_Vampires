@@ -20,9 +20,10 @@ io.sockets.on('connection', function(socket) {
 
 	socket.on('send_broadcast', function(data) {
 		socket.broadcast.emit('send_broadcast', { message : data.message });
+		console.log(data);
 	});
 
-	socket.addListener('Test', function(data){
+	socket.on('Test', function(data){
 		console.log(data);
 	});
 
