@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<title>Virtual Player Connect.</title>
+		<script type="text/javascript" src="./jquery-1.8.2.min.js"></script>
+		<script type="text/javascript" src="./socket.io.js"></script>
+		<script type="text/javascript">
+			var socket = io.connect('http://localhost:2525/');
+
+			socket.on('error', function() {
+				console.log('The connection has failed.');
+			});
+
+			socket.on('waiting_message', function(data) {
+				console.log(data);
+			});
+
+			socket.on('succesfull', function(data){
+				console.log('we recieved:');
+				console.log(data);
+			});
+
+			$(document).ready(function (){
+
+			});
+
+			
+		</script>
+	</head>
+
+	<body>
+		<form action="" method="post">
+			<img src="http://www.timnowackphotography.com/t/okButton.png" id="okbutton" />
+		</form>
+	</body>
+</html>
