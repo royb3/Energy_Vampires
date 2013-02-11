@@ -23,8 +23,7 @@ public class Chat extends MainActivity {
 	private Button btnSend;
 	private Context c;
 	private EditText etChat;
-	private String address = "ws://192.168.8.74:2525";
-	//private String address = "ws://"+ app_preferences.getString("IP", "") +":"+ app_preferences.getString("port", "");
+	private String address = "";
 	
 	public String[] testString = {"message\" : \"test nr 2"};
 
@@ -53,8 +52,18 @@ public class Chat extends MainActivity {
 		this.btnSend = (Button) findViewById(R.id.btnSend);
 		this.etChat = (EditText) findViewById(R.id.etChat);
 		
-		address = "ws://"+ app_preferences.getString("IP", "") +":"+ app_preferences.getString("Port", "");
-
+		
+		if(app_preferences.getString("IP", "") != "" && app_preferences.getString("Port", "") != "")
+		{
+			address = "ws://"+ app_preferences.getString("IP", "") +":"+ app_preferences.getString("Port", "");
+		}
+		else
+		{
+			Log.e("Missing settings", "MISSING ADDRESS AND PORT");
+		}
+		
+		Log.e("addres", address);
+		
 		this.btnSend.setOnClickListener(new OnClickListener() {
 		
 			@Override
