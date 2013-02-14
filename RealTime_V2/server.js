@@ -23,7 +23,7 @@ for (var i = 0; i < teamColors.length; i++) {
 //log the teams on startup
 console.log('the Teams:')
 console.log(teams);
-console.log(getAvaibleTeams(3));
+console.log(getAvailableTeams(3));
 
 
 
@@ -74,7 +74,7 @@ function PlayerJoinGame (socket) {
 	}	
 
 function GenerateRandomTeam(){
-	var availableTeams = getAvaibleTeams(maxPlayersPerTeam),
+	var availableTeams = getAvailableTeams(maxPlayersPerTeam),
 		chosenTeam = Math.floor(Math.random()*availableTeams.length);
 		console.log("the team id choosen:" + chosenTeam);
 		console.log(availableTeams);
@@ -86,7 +86,7 @@ function generateID(){
 	return players.length;
 }
 
-function getAvaibleTeams(maxPlayersPerTeam){
+function getAvailableTeams(maxPlayersPerTeam){
 	var availableTeams = [];
 	var countteams = [];
 	teams.forEach(function (team){
