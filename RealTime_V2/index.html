@@ -12,7 +12,11 @@
 
 			socket.on('waiting_message', function(data) {
 				console.log(data);
-			})
+			});
+
+			socket.on('send', function(data){
+				console.log(data);
+			});
 
 			$(document).ready(function () {
 				$("#okbutton").click(function () {

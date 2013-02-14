@@ -41,7 +41,7 @@ io.sockets.on('connection', function(socket) {
 	});
 
 	var socket_id = socket.id;
-	socket(socket_id).emit('Dit is alleen voor Henny.');
+	io.sockets.socket(socket_id).emit('send', 'Dit is alleen voor Henny.');
 
 	socket.on('message', function(data){
 		console.log(data);
