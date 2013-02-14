@@ -165,16 +165,16 @@ public class MainActivity extends Activity {
                 {
                 	switch(color)
                	 	{
-           	 		case 1:
+           	 		case 0:
            	 			body.setBackgroundColor(android.graphics.Color.BLUE);
            	   		break;
-           	 		case 2:
+           	 		case 1:
            	 			body.setBackgroundColor(android.graphics.Color.GREEN);
             			break;
-           	 		case 3:
+           	 		case 2:
            	 			body.setBackgroundColor(android.graphics.Color.RED);
             			break;
-           	 		case 4:
+           	 		case 3:
            	 			body.setBackgroundColor(android.graphics.Color.YELLOW);
             			break;
                	 	}	

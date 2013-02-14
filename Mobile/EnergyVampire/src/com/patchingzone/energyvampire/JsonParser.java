@@ -1,6 +1,7 @@
 package com.patchingzone.energyvampire;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,6 +54,15 @@ public class JsonParser {
 		}*/
 		
 		//Chat.ioWebSocket.emit(new JSONObject().put("name", Name).put("args",Values));
+		try {
+			Chat.ioWebSocket.getWebSocket().sendMessage((new JSONObject().put("args",Arrays.toString(Values)).put("name", Name))+"");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static String Parse(String Message)
