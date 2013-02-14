@@ -9,7 +9,7 @@ var Player = require('./Player.js'),
 	Team = require('./Team.js'),
 	teams = [];
 
-//paramaters
+//parameters
 var maxPlayers = 12,
 	maxPlayersPerTeam = 3,
 	teamColors = ['red', 'blue','green', 'yellow'];
@@ -24,8 +24,6 @@ for (var i = 0; i < teamColors.length; i++) {
 console.log('the Teams:')
 console.log(teams);
 console.log(getAvailableTeams(3));
-
-
 
 server.listen(2525);
 
