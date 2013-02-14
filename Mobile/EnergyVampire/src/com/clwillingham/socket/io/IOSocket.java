@@ -45,6 +45,16 @@ public class IOSocket {
 		Log.d("connected", "connected");
 		//webSocket.init();
 		
+	} 
+	
+	public void disconnect() {
+		
+		try {
+			webSocket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 

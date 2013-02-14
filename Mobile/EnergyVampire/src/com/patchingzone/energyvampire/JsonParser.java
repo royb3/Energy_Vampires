@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import android.util.Log;
 
 import com.clwillingham.socket.io.IOMessage;
+import com.clwillingham.socket.io.IOWebSocket;
 
 public class JsonParser {
 	
@@ -20,7 +21,8 @@ public class JsonParser {
 	public static void SendMessage(String Message)
 	{
 		try {
-			Chat.ioWebSocket.getWebSocket().sendMessage(Message);
+			
+			Connect.ioWebSocket.getWebSocket().sendMessage(Message);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -29,33 +31,9 @@ public class JsonParser {
 	
 	public static void SendJsonMessage(String Name,String[] Values)
 	{	
-		/*
-		String messageToSend = "{\"name\":\""  + Name + "\",\"args\":[{";
-		for(String value : Values)
-		{
-			if(value == Values[0])
-			{
-				messageToSend += "\"" + value;
-			}
-			else
-			{
-				messageToSend += "\",\"" + value;
-			}
-			
-		}
-		
-		messageToSend += "\"}]";
-		
 		try {
-			Chat.ioWebSocket.getWebSocket().SendMessage(
-					new IOMessage(IOMessage.EVENT, -1, "", messageToSend));
-		} catch (IOException e) {
-			Log.e("JSON","cant send JSON message" + e);
-		}*/
-		
-		//Chat.ioWebSocket.emit(new JSONObject().put("name", Name).put("args",Values));
-		try {
-			Chat.ioWebSocket.getWebSocket().sendMessage((new JSONObject().put("args",Arrays.toString(Values)).put("name", Name))+"");
+			Log.d("QW", "" + Connect.ioWebSocket);
+			Connect.ioWebSocket.getWebSocket().sendMessage((new JSONObject().put("args",Arrays.toString(Values)).put("name", Name))+"");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -113,10 +113,12 @@ public abstract class WebSocketClient implements Runnable, WebSocketListener {
 	public void connect() {
 		if (!running) {
 			this.running = true;
-			(new Thread(this)).start();
+			Thread t = new Thread(this);
+			t.start();
 		}
 	}
 
+	
 	/**
 	 * Calls <var>close</var> on the underlying SocketChannel, which in turn
 	 * closes the socket connection, and ends the client socket thread.

@@ -26,7 +26,7 @@ public class Chat extends MainActivity {
 	
 	public String[] testString = {"message\" : \"test nr 2"};
 
-	public static IOSocket ioWebSocket;
+	public IOSocket ioWebSocket;
 	MessageCallback callback;
 	IOMessage msg;
 	IOWebSocket sok;

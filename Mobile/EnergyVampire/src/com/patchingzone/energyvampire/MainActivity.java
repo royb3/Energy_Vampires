@@ -37,19 +37,19 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-	private Button BT_home;
-	private TextView info;
-	private TextView count;
-	private TextView GPS;
-	private Boolean ConnectOk = false;
-	private RelativeLayout body;
-	private Animation fade;
+	public Button BT_home;
+	public TextView info;
+	public TextView count;
+	public TextView GPS;
+	public Boolean ConnectOk = false;
+	public RelativeLayout body;
+	public Animation fade;
 	
-	private SoundPool sp;
-	private int sound;
-	private int sound2;
+	public SoundPool sp;
+	public int sound;
+	public int sound2;
 	
-	SharedPreferences app_preferences;
+	public static SharedPreferences app_preferences;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +78,18 @@ public class MainActivity extends Activity {
 				// TODO Auto-generated method stub
 				if(ConnectOk)
 				{
-					startGame();
+					//startGame();
 					BT_home.setVisibility(View.GONE);
-				}else
-				{
-					connect();
+				}
+				else{
+					if(Connect.isConnected()){
+						BT_home.setText("I'm Ready");
+						ConnectOk = true;
+					}
+					else
+					{
+						Toast.makeText(getApplicationContext(), "Can't Connect!", Toast.LENGTH_SHORT).show();
+					}
 				}
 				
 			}
@@ -100,8 +107,8 @@ public class MainActivity extends Activity {
 	        	
 	            return true;
 	        case R.id.Chat:
-	        	Intent sec=new Intent(MainActivity.this,Chat.class);
-                startActivity(sec);
+	        	//Intent sec=new Intent(MainActivity.this,Chat.class);
+                //startActivity(sec);
 	        	return true;
 	        case R.id.Cred:
 	        	Intent cred =new Intent(MainActivity.this,Credits.class);
@@ -116,7 +123,7 @@ public class MainActivity extends Activity {
 	    }
 	}
 
-	public void connect()
+	/*public void connect()
 	{
 		Toast toast = Toast.makeText(getApplicationContext(), "Connecting", Toast.LENGTH_SHORT);
 		toast.show();
@@ -125,33 +132,9 @@ public class MainActivity extends Activity {
 		BT_home.setText("I'm Ready");
 		
 		ConnectOk = true;
-	}
+	}*/
 	
-	public void startGame()
-	{
-		info.setVisibility(View.GONE);
-		Toast toast = Toast.makeText(getApplicationContext(), "Starting", Toast.LENGTH_SHORT);
-		toast.show();
-		count.setVisibility(View.VISIBLE);
-		new CountDownTimer(10000, 100) {
-		int secondsLeft = 10; 
-
-	      	public void onTick(long millisUntilFinished) {
-	    	 	if (Math.round((float)millisUntilFinished / 1000.0f) != secondsLeft)
-		         {  
-		             secondsLeft = Math.round((float)millisUntilFinished / 1000.0f);
-		             count.setText("" +secondsLeft );
-		             sp.play(sound, 1, 1, 0, 0, 1);
-		         }
-		     }
-
-		     public void onFinish() {
-		    	 sp.play(sound2, 1, 1, 0, 0, 1);
-		    	 Color(4);
-		         
-		     }
-		  }.start();
-	}
+	
 	
 	public void  Color(final int color)
 	{
@@ -320,6 +303,13 @@ public class MainActivity extends Activity {
 	{
 		super.onPause();
 		stopCompass();
+	}
+	
+	protected void onStop()
+	{
+		super.onStop();
+		Connect.ioWebSocket.disconnect();
+		//Connect.connection.stop();
 	}
 	
 	
