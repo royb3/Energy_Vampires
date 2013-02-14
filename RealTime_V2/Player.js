@@ -8,7 +8,10 @@ function Player (id, nickname, score, team, socket, lng, lat) {
 	this.score = score,
 	this.team = team;
 	this.socket = socket;
+	this.state = 0;
 }
+
+Player.prototype.playerStates 	= {NOTREADY = 0, READY = 1, PLAYING = 2};
 
 
 Player.prototype.addScore 			= function addScore(value){ this.score += value; };
