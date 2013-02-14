@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Settings extends MainActivity {
 	
@@ -47,6 +48,8 @@ public class Settings extends MainActivity {
 				Log.d("PhoneID" , Phone_ID.getText().toString().trim());
 				editor.commit();
 				
+				Toast toast = Toast.makeText(getApplicationContext(), "Settings Saved", Toast.LENGTH_SHORT);
+				toast.show();
 			}
 		});	
 	}
