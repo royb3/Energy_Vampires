@@ -190,7 +190,6 @@ public class MainActivity extends Activity {
                     body.setBackgroundColor(android.graphics.Color.BLACK);
                 };     
             });     
-    
 	}
 	
 

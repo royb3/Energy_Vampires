@@ -6,7 +6,6 @@ import com.clwillingham.socket.io.IOSocket;
 import com.clwillingham.socket.io.IOWebSocket;
 import com.clwillingham.socket.io.MessageCallback;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;

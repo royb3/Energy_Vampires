@@ -72,7 +72,6 @@ public class JsonParser {
 		JSONArray jsonArray = jsonObject.getJSONArray("args");
 		JSONObject jsonObject2 = jsonArray.getJSONObject(0);
 		
-		//henny let op de HOOFDLETTERS
 		String gotMsg = jsonObject2.getString("message");
 		
 		Log.d("Chat", "The message is " + gotMsg);
