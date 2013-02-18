@@ -42,10 +42,6 @@ io.sockets.on('connection', function(socket) {
 		console.log(data);
 	});
 
-	socket.on('anything', function(data){
-		console.log(data);
-	});
-
 	if(gamestate.state == gamestate.gamestates.SERVER_START){
 		var newPlayer = PlayerJoinGame(socket),
 			data = { message : "player joined game", nickname : newPlayer.nickname};
