@@ -36,7 +36,11 @@ io.sockets.on('connection', function(socket) {
 	socket.on('send_broadcast', function(data) {
 		socket.broadcast.emit('send_broadcast', data);
 		console.log(data);
-	});	
+	});
+
+	socket.on('debug', function(data) {
+		console.log(data);
+	});
 
 	if(gamestate.state == gamestate.gamestates.SERVER_START){
 		var newPlayer = PlayerJoinGame(socket),
