@@ -1,11 +1,17 @@
 package com.patchingzone.energyvampire;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +20,7 @@ import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -65,16 +72,48 @@ public class MainActivity extends Activity {
 				// TODO Auto-generated method stub
 				if(!ifConnected){
 					//connect to server.
-					if(ma.startConnection()){
-						ifConnected = true;
-						info.setText("U're in lobby.");
-						BT_home.setText("I'm Ready");
-						ma.createGPS();
-					}
-					else
-					{
-						Toast.makeText(getApplicationContext(), "Can't Connect!", Toast.LENGTH_SHORT).show();
-					}
+					
+					final EditText input = new EditText(MainActivity.this);
+					input.setHint("Please put name here.");
+					input.setText(ma.app_preferences.getString("ID", "")); 
+					new AlertDialog.Builder(MainActivity.this)
+				    .setTitle("Set Name")
+				    //.setMessage("")
+				    .setView(input)
+				    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+				        public void onClick(DialogInterface dialog, int whichButton) {
+				            String value = input.getText().toString();
+				            Log.d("hans", value);
+				            
+				            SharedPreferences.Editor editor = MainApp.app_preferences.edit();
+				            editor.putString("ID", input.getText().toString().trim());
+				            editor.commit();
+				            
+				            if(ma.startConnection()){
+					            ifConnected = true;
+								info.setText("U're in lobby.");
+								BT_home.setText("I'm Ready");
+								ma.createGPS();
+								try {
+									ma.ioWebSocket.emit("debug", new JSONArray().put(value));
+								} catch (JSONException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+				            }
+							else
+							{
+								Toast.makeText(getApplicationContext(), "Can't Connect!", Toast.LENGTH_SHORT).show();
+							}
+				        }
+				    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+				        public void onClick(DialogInterface dialog, int whichButton) {
+				            // Do nothing.
+				        	ma.closeConnection();
+				        }
+				    }).show();
+					
+					
 					
 				}
 				else{
