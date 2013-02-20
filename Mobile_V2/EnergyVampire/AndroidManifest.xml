@@ -33,6 +33,7 @@
         <activity android:name="BaseWebview"></activity>
         <activity android:name="Credits"></activity>
         <activity android:name="Options"></activity>
+        <activity android:name="Game"></activity>
     </application>
 
 </manifest>

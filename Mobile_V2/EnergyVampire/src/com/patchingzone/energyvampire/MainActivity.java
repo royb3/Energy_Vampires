@@ -112,9 +112,6 @@ public class MainActivity extends Activity {
 				        	ma.closeConnection();
 				        }
 				    }).show();
-					
-					
-					
 				}
 				else{
 					//Set rdy	
