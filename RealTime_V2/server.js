@@ -12,7 +12,8 @@ var Player = require('./Player.js'),
 //parameters
 var maxPlayers = 12,
 	maxPlayersPerTeam = 3,
-	teamColors = ['red', 'blue','green', 'yellow'];
+	teamColors = ['red', 'blue','green', 'yellow'],
+	minPlayers = 8;
 
 //create the teams on startup
 for (var i = 0; i < teamColors.length; i++) {
@@ -28,7 +29,8 @@ console.log(getAvailableTeams(3));
 server.listen(2525);
 
 var gamestate = new Gamestate.Gamestate(0);
-var countdown = 0;
+var countdown = {timeLeft:0, state:0};
+
 
 io.set('log level', 3);
 
@@ -47,6 +49,9 @@ io.sockets.on('connection', function(socket) {
 		socket.broadcast.emit("playerJoined", { message : "player joined game", nickname : newPlayer.getNickname()});
 		socket.emit("succesfull", {message: "you have joined and other players have been notified.", nickname : newPlayer.nickname, team : teams[newPlayer.team], playerList : players});
 
+		if(countdown.state == 0){
+			CountDown(300);
+		}
 
 	}
 
@@ -141,9 +146,17 @@ function startGame()
 
 function CountDown(t)
 {
-	countdown = t;
+	countdown.state = 1;
+	countdown.timeLeft = t;
 	io.sockets.emit('countDown', {countDown: t, serverTime: Date.now(), gameState : gamestate.state})
 	if(t > 0){
-		setTimeout(countDown(t - 1), 1000);
+		setTimeout(CountDown(t - 1), 1000);
+	}
+	if(gamestate.state == gamestate.gamestates.SERVER_START){
+		if(t == 0){
+			if(players.length >= minPlayers){
+				gamestate.state = gamestate.gamestates.GAME_READY;
+			}
+		}
 	}
 }
