@@ -48,7 +48,7 @@ public class SocketIOClient {
     private static String downloadUriAsString(final HttpUriRequest req) throws IOException {
         AndroidHttpClient client = AndroidHttpClient.newInstance("android-websockets");
         //TIME OUT VERANDERD
-        client.getParams().setParameter("http.connection.timeout", 50);
+        client.getParams().setParameter("http.connection.timeout", 500);
         
         try {
             HttpResponse res = client.execute(req);
