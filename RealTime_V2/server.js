@@ -42,28 +42,79 @@ io.sockets.on('connection', function(socket) {
 		console.log(data);
 	});
 
-	if(gamestate.state == gamestate.gamestates.SERVER_START){
-		var newPlayer = PlayerJoinGame(socket),
-			data = { message : "player joined game", nickname : newPlayer.nickname};
-		console.log(data);
 
-		socket.broadcast.emit("playerJoined", data);
+	socket.on('message', function(data){
+		console.log(data);
+	});
+
+	socket.on('ready', function(data){
+		var statechange = PlayerReady(data.clientId);
+		if(statechange = 1)
+		{
+			gamestate.state = gamestate.gamestates.GAME_START;
+			startGame();
+		}
+	});
+
+	socket.on('rockthebutton', function(data){
+
+	})
+
+	if(gamestate.state == gamestate.gamestates.SERVER_START){
+		var newPlayer = PlayerJoinGame(socket);
+
+		socket.broadcast.emit("playerJoined", { message : "player joined game", nickname : newPlayer.getNickname()};);
 		socket.emit("succesfull", {message: "you have joined and other players have been notified.", nickname : newPlayer.nickname, team : teams[newPlayer.team]});
+
+
+
+
+
+
+
+
+
+
+
+
 	}
 	else {
 		socket.emit('waiting_message', { Message: 'Wait for the next game.' });
 	}
 });
 
+function PlayerReady(playerid)
+{
+	players[playerid].state = 1;
+
+	if(AreAllReady())
+	{
+		return 1;
+	}
+	return 0;
+}
+
+function AreAllReady()
+{
+	for(var player in players)
+	{
+		if (player.state == 0)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 function PlayerJoinGame (socket) {
-		var id = generateID(),
+	var id = generateID(),
 		nickname = "player" + id,
 		team = GenerateRandomTeam(),
-		newPlayer = new Player.Player(id, nickname, 100, team, socket);
-		players[id] = newPlayer;
-		console.log(newPlayer);
-		return newPlayer;
-	}	
+		newPlayer = new Player.Player(id, nickname, 100, team, socket.id);
+	players[id] = newPlayer;
+	console.log(newPlayer);
+	return newPlayer;
+}	
 
 function GenerateRandomTeam(){
 	var availableTeams = getAvailableTeams(maxPlayersPerTeam),
@@ -98,4 +149,17 @@ function getAvailableTeams(maxPlayersPerTeam){
 		}
 	};
 	return availableTeams;
+
+}
+
+function startGame()
+{
+
+}
+
+function countDown(t)
+{
+	io.sockets.emit('countDown', {countDown: t, serverTime: Date.now()})
+	setTimeout(countDown(t - 1), 1000);
+
 }

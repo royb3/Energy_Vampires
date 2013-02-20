@@ -1,13 +1,13 @@
 
 
-function Player (id, nickname, score, team, socket, lng, lat) { 
+function Player (id, nickname, score, team, socketId, lng, lat) { 
 	this.playerId = id;
 	this.nickname = nickname,
 	this.lng = lng,
 	this.lat = lat,
 	this.score = score,
 	this.team = team;
-	this.socket = socket;
+	this.socketId = socketId;
 	this.state = 0;
 }
 
@@ -30,7 +30,7 @@ Player.prototype.getLat 		= function getLat(){ return this.lat; };
 Player.prototype.getScore 		= function getScore(){ return this.score; };
 Player.prototype.getTeam 		= function getTeam(){ return this.team; };
 Player.prototype.getUsername 	= function getUsername(){ return this.username; };
-Player.prototype.getSocket 		= function getSocket(){ return this.socket; };
+Player.prototype.getSocketId 	= function getSocketId(){ return this.socketId; };
 
 
 
