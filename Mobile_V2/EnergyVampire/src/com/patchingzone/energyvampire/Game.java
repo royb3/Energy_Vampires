@@ -13,5 +13,4 @@ public class Game extends Activity {
 	    Log.d("game", "ingame");
 	    // TODO Auto-generated method stub
 	}
-
 }
