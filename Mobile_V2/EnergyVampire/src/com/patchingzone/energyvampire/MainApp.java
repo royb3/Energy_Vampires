@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,6 +23,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.provider.Settings;
+import android.test.suitebuilder.annotation.Suppress;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView.FindListener;
@@ -163,7 +165,11 @@ public class MainApp extends Application{
 		        Log.d(tag, String.format("Got event %s: %s", event, arguments.toString())); 
 		        
 		        if(event.equals("playerJoined")) // player list
-					onPlayerList(arguments);
+		        	startGame();
+		        //onPlayerList(arguments);
+		        if(event.equals("StartGame"))
+		        	startGame();
+		        	
 		    }
 
 		    @Override
@@ -177,6 +183,16 @@ public class MainApp extends Application{
 		        MainApp.connectStatus = 2;  
 		    }
 		});
+	}
+
+
+	public void startGame()
+	{
+		Log.d("game", "0");
+		Intent intent = new Intent(getApplicationContext(), Game.class );
+		startActivity(intent);
+		Log.d("game", "1");
+		
 	}
 	
 	public void onPlayerList(JSONArray players)
