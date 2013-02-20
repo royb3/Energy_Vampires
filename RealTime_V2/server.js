@@ -28,32 +28,13 @@ console.log(getAvailableTeams(3));
 server.listen(2525);
 
 var gamestate = new Gamestate.Gamestate(0);
+var countdown = 0;
 
 io.set('log level', 3);
 
 io.sockets.on('connection', function(socket) {
-
-	socket.on('send_broadcast', function(data) {
-		socket.broadcast.emit('send_broadcast', data);
-		console.log(data);
-	});
-
 	socket.on('debug', function(data) {
 		console.log(data);
-	});
-
-
-	socket.on('message', function(data){
-		console.log(data);
-	});
-
-	socket.on('ready', function(data){
-		var statechange = PlayerReady(data.clientId);
-		if(statechange = 1)
-		{
-			gamestate.state = gamestate.gamestates.GAME_START;
-			startGame();
-		}
 	});
 
 	socket.on('rockthebutton', function(data){
@@ -63,20 +44,21 @@ io.sockets.on('connection', function(socket) {
 	if(gamestate.state == gamestate.gamestates.SERVER_START){
 		var newPlayer = PlayerJoinGame(socket);
 
-		socket.broadcast.emit("playerJoined", { message : "player joined game", nickname : newPlayer.getNickname()};);
-		socket.emit("succesfull", {message: "you have joined and other players have been notified.", nickname : newPlayer.nickname, team : teams[newPlayer.team]});
+		socket.broadcast.emit("playerJoined", { message : "player joined game", nickname : newPlayer.getNickname()});
+		socket.emit("succesfull", {message: "you have joined and other players have been notified.", nickname : newPlayer.nickname, team : teams[newPlayer.team], playerList : players});
 
 
+	}
 
-
-
-
-
-
-
-
-
-
+	else if(gamestate.state == gamestate.gamestates.GAME_READY){
+		socket.on('ready', function(data){
+			var statechange = PlayerReady(data.clientId);
+			if(statechange = 1)
+			{
+				gamestate.state = gamestate.gamestates.GAME_START;
+				startGame();
+			}
+		});
 	}
 	else {
 		socket.emit('waiting_message', { Message: 'Wait for the next game.' });
@@ -157,9 +139,11 @@ function startGame()
 
 }
 
-function countDown(t)
+function CountDown(t)
 {
-	io.sockets.emit('countDown', {countDown: t, serverTime: Date.now()})
-	setTimeout(countDown(t - 1), 1000);
-
+	countdown = t;
+	io.sockets.emit('countDown', {countDown: t, serverTime: Date.now(), gameState : gamestate.state})
+	if(t > 0){
+		setTimeout(countDown(t - 1), 1000);
+	}
 }
