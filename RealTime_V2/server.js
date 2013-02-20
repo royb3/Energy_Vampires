@@ -50,7 +50,7 @@ io.sockets.on('connection', function(socket) {
 		socket.emit("succesfull", {message: "you have joined and other players have been notified.", nickname : newPlayer.nickname, team : teams[newPlayer.team], playerList : players});
 
 		
-		CountDown(5);
+		//CountDown(5);
 		
 
 	}

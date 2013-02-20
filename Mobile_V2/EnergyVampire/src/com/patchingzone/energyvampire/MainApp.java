@@ -90,7 +90,7 @@ public class MainApp extends Application{
 					gpsData.put("TimeStamp", location.getTime());
 					gpsData.put("Head", location.getBearing());
 					arguments.put(gpsData);
-					ioWebSocket.emit("debug", arguments);
+					ioWebSocket.emit("GPS", arguments);
 					Log.d("gps", arguments.toString());
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -165,8 +165,7 @@ public class MainApp extends Application{
 		        Log.d(tag, String.format("Got event %s: %s", event, arguments.toString())); 
 		        
 		        if(event.equals("playerJoined")) // player list
-		        	startGame();
-		        //onPlayerList(arguments);
+		        	onPlayerList(arguments);
 		        if(event.equals("StartGame"))
 		        	startGame();
 		        	
@@ -189,7 +188,7 @@ public class MainApp extends Application{
 	public void startGame()
 	{
 		Log.d("game", "0");
-		Intent intent = new Intent(getApplicationContext(), Game.class );
+		Intent intent = new Intent(this, Game.class );
 		startActivity(intent);
 		Log.d("game", "1");
 		
@@ -199,6 +198,7 @@ public class MainApp extends Application{
 	{
 		// code for reaciving players here //
 		Log.d("playerList" , players.toString());
+		startGame();
 	}
 	
 	public void testMsg()

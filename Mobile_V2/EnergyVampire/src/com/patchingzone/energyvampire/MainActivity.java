@@ -109,7 +109,7 @@ public class MainActivity extends Activity {
 				    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 				        public void onClick(DialogInterface dialog, int whichButton) {
 				            // Do nothing.
-				        	ma.closeConnection();
+				        	//ma.closeConnection();
 				        }
 				    }).show();
 				}
@@ -172,6 +172,6 @@ public class MainActivity extends Activity {
     	return true;
     }
     
-    
+
     
 }
