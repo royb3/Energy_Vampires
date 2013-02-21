@@ -51,6 +51,10 @@ io.sockets.on('connection', function(socket) {
 		socket.broadcast.emit('startGame', data);
 	});
 	
+	socket.on('stopGame', function(data){
+		socket.broadcast.emit('stopGame', data);
+	});
+	
 	
 	
 	if(gamestate.state == gamestate.gamestates.SERVER_START){

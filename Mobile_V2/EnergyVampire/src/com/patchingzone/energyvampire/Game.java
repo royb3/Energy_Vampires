@@ -20,6 +20,8 @@ public class Game extends Activity {
 	    Log.d("game", "ingame");
 	    
 	    ma = new MainApp();
+	    
+	    exit();
 	    // TODO Auto-generated method stub
 	}
 	
@@ -42,5 +44,26 @@ public class Game extends Activity {
 	public void onBackPressed() {
 	    // Do Here what ever you want do on back press;
 		Toast.makeText(getApplicationContext(), "You shall not pass!", Toast.LENGTH_SHORT).show();
+
+	}
+	
+	public void exit()
+	{
+		Thread exit = new Thread() {
+			@Override
+			public void run() {
+				while(ma.gameActive)
+				{
+					try {
+						sleep(500);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				finish();
+			}
+		};
+		exit.start();
 	}
 }

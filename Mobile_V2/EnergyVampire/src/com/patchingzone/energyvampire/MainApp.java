@@ -36,6 +36,7 @@ public class MainApp extends Application{
 	public static SocketIOClient ioWebSocket;
 	public static String address;
 	public static Boolean canConnect = false;
+	public static Boolean gameActive = false;
 	
 	public static Thread connection;
 	public static int connectStatus = 2;
@@ -168,7 +169,8 @@ public class MainApp extends Application{
 		        	onPlayerList(arguments);
 		        if(event.equals("startGame"))
 		        	startGame();
-		        	
+		        if(event.equals("stopGame"))
+		        	gameActive = false;
 		    }
 
 		    @Override
@@ -183,15 +185,17 @@ public class MainApp extends Application{
 		    }
 		});
 	}
-
-
+	
 	public void startGame()
 	{
 		Log.d("game", "0");
-		Intent intent = new Intent(this, Game.class );
-		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		startActivity(intent);
-		Log.d("game", "1");
+		if(!gameActive){
+			gameActive = true;
+			Intent intent = new Intent(this, Game.class );
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+			Log.d("game", "1");
+		}
 		
 	}
 	
