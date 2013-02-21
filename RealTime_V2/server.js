@@ -163,19 +163,4 @@ function CountDown(t)
 			}
 		}, 1000);	
 	}
-	
-
-	// countDown.state = 1;
-	// countDown.timeLeft = t;
-	// io.sockets.emit('countDown', {countDown: t, serverTime: Date.now(), gameState : gamestate.state})
-	// if(t > 0){
-	// 	setTimeout(CountDown(t - 1), 1000);
-	// }
-	// if(gamestate.state == gamestate.gamestates.SERVER_START){
-	// 	if(t == 0){
-	// 		if(players.length >= minPlayers){
-	// 			gamestate.state = gamestate.gamestates.GAME_READY;
-	// 		}
-	// 	}
-	// }
 }
