@@ -166,7 +166,7 @@ public class MainApp extends Application{
 		        
 		        if(event.equals("playerJoined")) // player list
 		        	onPlayerList(arguments);
-		        if(event.equals("StartGame"))
+		        if(event.equals("startGame"))
 		        	startGame();
 		        	
 		    }
@@ -189,6 +189,7 @@ public class MainApp extends Application{
 	{
 		Log.d("game", "0");
 		Intent intent = new Intent(this, Game.class );
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		startActivity(intent);
 		Log.d("game", "1");
 		
@@ -198,7 +199,6 @@ public class MainApp extends Application{
 	{
 		// code for reaciving players here //
 		Log.d("playerList" , players.toString());
-		startGame();
 	}
 	
 	public void testMsg()

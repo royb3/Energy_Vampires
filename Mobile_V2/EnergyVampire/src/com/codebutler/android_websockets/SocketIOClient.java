@@ -87,17 +87,14 @@ public class SocketIOClient {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        try{
-	        Log.d(TAG, "Emitting event: " + event.toString());
-	        mSendHandler.post(new Runnable() {
-	            @Override
-	            public void run() {
-	                mClient.send(String.format("5:::%s", event.toString()));
-	            }
-	        });
-        }catch (Exception e){
-        	
-        }
+        
+        Log.d(TAG, "Emitting event: " + event.toString());
+        mSendHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                mClient.send(String.format("5:::%s", event.toString()));
+            }
+        });
     }
 
     private void connectSession() throws URISyntaxException {
@@ -210,12 +207,12 @@ public class SocketIOClient {
     private void cleanup() {
     	try
     	{
-	    	mSendLooper.quit();
-	        mSendLooper = null;
-	        mSendHandler = null;
-	    	
-	        mClient.disconnect();
-	        mClient = null;
+    	mSendLooper.quit();
+        mSendLooper = null;
+        mSendHandler = null;
+    	
+        mClient.disconnect();
+        mClient = null;
     	}catch(Exception e){}
     }
 

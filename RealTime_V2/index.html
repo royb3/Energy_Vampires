@@ -27,12 +27,20 @@
 					socket.emit('send_broadcast', { message: "Ik heb nu op de knop gedrukt." });
 				});
 			});
+			
+			$(document).ready(function () {
+				$("#StartBTN").click(function () {
+					socket.emit('startGame', { Startgame: "Ik heb nu op de knop gedrukt." });
+					console.log("asdasdasd");
+				});
+			});
 		</script>
 	</head>
 
 	<body>
 		<form action="" method="post">
-			<img src="http://www.timnowackphotography.com/t/okButton.png" id="okbutton" />
+			Send Broadcast:<img src="http://www.timnowackphotography.com/t/okButton.png" id="okbutton" /><br />
+			Start Game:<img src="http://www.timnowackphotography.com/t/okButton.png" id="StartBTN" />
 		</form>
 	</body>
 </html>

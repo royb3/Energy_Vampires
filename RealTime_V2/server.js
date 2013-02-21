@@ -41,8 +41,18 @@ io.sockets.on('connection', function(socket) {
 
 	socket.on('rockthebutton', function(data){
 
-	})
+	});
 
+	socket.on('send_broadcast', function(data){
+		socket.broadcast.emit('send_broadcast', data);
+	});
+
+	socket.on('startGame', function(data){
+		socket.broadcast.emit('startGame', data);
+	});
+	
+	
+	
 	if(gamestate.state == gamestate.gamestates.SERVER_START){
 		var newPlayer = PlayerJoinGame(socket);
 

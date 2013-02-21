@@ -92,7 +92,8 @@ public class MainActivity extends Activity {
 				            if(ma.startConnection()){
 					            
 								try {
-									ma.ioWebSocket.emit("debug", new JSONArray().put(value));
+									ma.ioWebSocket.emit("debug", new JSONArray().put(value).put("Mobile"));
+									//ma.ioWebSocket.emit("clientType", new JSONArray().put("Mobile"));
 									ifConnected = true;
 									info.setText("U're in lobby.");
 									BT_home.setText("I'm Ready");
@@ -156,6 +157,12 @@ public class MainActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
+    }
+    
+    public void startGame()
+    {
+    	Intent intent = new Intent(this, Game.class );
+		startActivity(intent);
     }
     
     public boolean onPrepareOptionsMenu(Menu menu)
