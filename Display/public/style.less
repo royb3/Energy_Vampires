@@ -1,0 +1,221 @@
+/*less css values to make it easier to change multiple values at once*/
+
+@backgroundColor: #ECF1EF;
+@headerFont: 'Stalinist One', cursive;
+@footerFont: 'Stalinist One', cursive;
+@teamPadding: 50px;
+@upper: uppercase;
+@teamFontSize: 2.188em;
+@top3font: 'Aldrich', sans-serif;
+@top3fontsize: 1.4em;
+@scoreSize: 5em;
+@teamLeft: red;
+@teamRight: blue;
+@textShadow: 2px 2px grey;
+@displayProcessing: none;
+
+/* Makes sure the countdown is in the middle of the screen */
+#countdown{
+	position:relative;
+	background-color: @backgroundColor;
+	width: 100%;
+	height: 100%;
+	font-family: @headerFont;
+	font-size: 200px;
+	text-align:center;
+}
+
+/* Part of the countdown */
+#show-time{
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 50%;
+    height: 27%;
+    margin: auto;
+	}
+
+
+#body{
+	background-color: @backgroundColor;	
+}
+
+#header{
+	font-family: @headerFont;
+	width:100%;
+	height:12%;
+	background-color: @backgroundColor;
+	padding-top: 20px;
+}
+
+/* No bullets in front of the list items */
+ul{
+	list-style-type: none;
+}
+
+/* Set properties for the left team*/
+#teamleft {
+	float:left;
+	width: 5%;
+	padding-left: @teamPadding;
+	opacity: 0.3;
+	
+	
+	h1{
+		font-size: @teamFontSize;
+		text-transform: @upper;
+		color: @teamLeft;
+		text-shadow: @textShadow;
+	}
+	
+	/* colour the group icon */
+	.icon-group{
+		color: @teamLeft;
+	}
+	
+}
+
+/* score font */
+#scoresleft{
+	float:left;
+	width: 22%;
+	
+	h1{
+		font-size: @scoreSize;
+		text-transform: @upper;
+		color: @teamLeft;
+		text-shadow: @textShadow;
+	}	
+}
+
+/* Top 3 left players properties
+#top3left{
+	float:left;
+	width: 5%;
+	text-align: left;
+	font-family: @top3font;
+	font-size: @top3fontsize;
+	color:grey;
+	
+	
+}
+*/
+
+/* Top 3 left scores properties*/
+#top3leftscores{
+	float:left;
+	width: 20%;
+	text-align: left;
+	font-family: @top3font;
+	font-size: @top3fontsize;
+	color:grey;
+	
+}
+
+/* Set properties for the right team*/
+#teamright{
+	float:right;
+	width: 5%;
+	text-align: right;
+	padding-right: @teamPadding;
+	opacity: 0.3;
+	h1{
+		font-size: @teamFontSize;
+		text-transform: @upper;
+		color: @teamRight;
+		text-shadow: @textShadow;
+	}
+	
+	.icon-group{
+		color: @teamRight;
+
+	}
+}
+/* score font */
+#scoresright{
+	float:right;
+	width: 22%;
+	text-align: right;
+	
+	
+	h1{
+		font-size: @scoreSize;
+		text-transform: @upper;
+		color: @teamRight;
+		text-shadow: @textShadow;
+	}
+}
+
+/* Top 3 right players properties*/
+#top3right{
+	float:right;
+	width: 5%;
+	font-family: @top3font;
+	text-align: left;
+	font-size: @top3fontsize;
+	color:grey;
+	
+}
+
+/* Top 3 right scores properties*/
+#top3rightscores{
+	float:right;
+	width: 5%;
+	font-family: @top3font;
+	text-align: right;
+	font-size: @top3fontsize;
+	color:grey;
+	
+}
+
+/* Map wrapper */
+#map
+{
+	background-color: @backgroundColor;
+	width: 100%;
+	height: 74%;
+	margin-top: 0%;
+	margin-left: 0%;
+}
+
+/* Processing div */
+#mapvampire
+{
+	display: @displayProcessing;
+	background-color: @backgroundColor;
+	width: 100%;
+	height: 100%;
+	margin-top: 0%;
+	margin-left: 0%;
+}
+
+/* Footer which also displays the game time */
+#footer{
+	font-family: @footerFont;
+	background-color: @backgroundColor;
+	float:right;
+	height:10%;
+	text-align:right;
+	padding-top: 10px;
+	padding-right: @teamPadding;
+	width:100%;
+	font-size:50px;
+	
+	/* Clock text opacity*/
+	.clock{
+		opacity:0.5;
+	}
+	
+	/* Clock icon opacity*/
+	.icon-time{
+		opacity:0.5;
+	}	
+}
+
+
+/*
+ *  SLIDESHOW
+ */
+

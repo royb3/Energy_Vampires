@@ -1,0 +1,262 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		
+		<link rel="stylesheet" type="text/css" href="reset.css" />
+		<link rel="stylesheet/less" type="text/css" href="style.less" />
+		<link rel="stylesheet" href="font-awesome.min.css">
+		<link href='http://fonts.googleapis.com/css?family=Stalinist+One|Aldrich' rel='stylesheet' type='text/css' />
+		<script src="http://localhost:8080/socket.io/socket.io.js"></script>
+		<script src="less.js" type="text/javascript"></script>
+		
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		
+		<script src="processing.js" type="text/javascript"></script>
+		
+		<script type="text/javascript">
+			function getProcessingSketchId () { return 'mapvampire'; }
+		</script>
+	
+		<!-- SLIDER -->
+		<link rel="stylesheet" href="css/supersized.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="theme/supersized.shutter.css" type="text/css" media="screen" />
+		
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.easing.min.js"></script>
+		
+		<script type="text/javascript" src="js/supersized.3.2.7.min.js"></script>
+		<script type="text/javascript" src="theme/supersized.shutter.min.js"></script>
+		
+		<script type="text/javascript">
+			
+			jQuery(function($){
+				
+				$.supersized({
+				
+					// Functionality
+					slide_interval          :   1000,		// Length between transitions
+					transition              :   3, 			// 0-None, 1-Fade, 2-Slide Top, 3-Slide Right, 4-Slide Bottom, 5-Slide Left, 6-Carousel Right, 7-Carousel Left
+					transition_speed		:	700,		// Speed of transition
+															   
+					// Components							
+					slide_links				:	'blank',	// Individual links for each slide (Options: false, 'num', 'name', 'blank')
+					slides 					:  	[			// Slideshow Images
+														{image : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.2/slides/kazvan-1.jpg', title : 'Image Credit: Maria Kazvan', thumb : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.2/thumbs/kazvan-1.jpg', url : 'http://www.nonsensesociety.com/2011/04/maria-kazvan/'},
+														{image : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.2/slides/kazvan-2.jpg', title : 'Image Credit: Maria Kazvan', thumb : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.2/thumbs/kazvan-2.jpg', url : 'http://www.nonsensesociety.com/2011/04/maria-kazvan/'},  
+														{image : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.2/slides/kazvan-3.jpg', title : 'Image Credit: Maria Kazvan', thumb : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.2/thumbs/kazvan-3.jpg', url : 'http://www.nonsensesociety.com/2011/04/maria-kazvan/'},
+														{image : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.2/slides/wojno-1.jpg', title : 'Image Credit: Colin Wojno', thumb : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.2/thumbs/wojno-1.jpg', url : 'http://www.nonsensesociety.com/2011/03/colin/'},
+														{image : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.2/slides/wojno-2.jpg', title : 'Image Credit: Colin Wojno', thumb : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.2/thumbs/wojno-2.jpg', url : 'http://www.nonsensesociety.com/2011/03/colin/'},
+														{image : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.2/slides/wojno-3.jpg', title : 'Image Credit: Colin Wojno', thumb : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.2/thumbs/wojno-3.jpg', url : 'http://www.nonsensesociety.com/2011/03/colin/'},
+														{image : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.2/slides/shaden-1.jpg', title : 'Image Credit: Brooke Shaden', thumb : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.2/thumbs/shaden-1.jpg', url : 'http://www.nonsensesociety.com/2011/06/brooke-shaden/'},
+														{image : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.2/slides/shaden-2.jpg', title : 'Image Credit: Brooke Shaden', thumb : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.2/thumbs/shaden-2.jpg', url : 'http://www.nonsensesociety.com/2011/06/brooke-shaden/'},
+														{image : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.2/slides/shaden-3.jpg', title : 'Image Credit: Brooke Shaden', thumb : 'http://buildinternet.s3.amazonaws.com/projects/supersized/3.2/thumbs/shaden-3.jpg', url : 'http://www.nonsensesociety.com/2011/06/brooke-shaden/'}
+												]
+					
+				});
+		    });
+		    
+		</script>
+		<!-- SLIDER END -->
+	</head>
+	
+	<!-- SLIDER CSS -->
+	<style type="text/css">
+		ul#demo-block{ margin:0 15px 15px 15px; }
+			ul#demo-block li{ margin:0 0 10px 0; padding:10px; display:inline; float:left; clear:both; color:#aaa; background:url('img/bg-black.png'); font:11px Helvetica, Arial, sans-serif; }
+			ul#demo-block li a{ color:#eee; font-weight:bold; }
+	</style>
+
+<body>
+	<script type="text/javascript">
+		//Set countdown and content div invisible initially
+		$(function() {
+				document.getElementById("countdown").style.display = "none";
+				document.getElementById("content").style.display = "none";
+					
+		});
+		
+		//showDiv function, show div on button click
+		function showDiv() {
+			document.getElementById('countdown').style.display = "block";
+			document.getElementById('loadGame').style.display = "none";
+				   
+			
+			//Countdown function
+			$(function(){
+				//Don't show content div
+				document.getElementById("content").style.display = "none";
+				
+                var timer = window.setInterval(function() {
+
+                    var timeCounter = $("span[id=show-time]").html();
+                    var updateTime = eval(timeCounter)- eval(1);
+                    $("span[id=show-time]").html(updateTime);
+					
+					//If less than 4 seconds left
+					if(updateTime < 4){
+						var span = document.getElementById("show-time");
+						console.log(updateTime);
+						
+						//Change the fontsize of the countdown
+						span.style.fontSize = "300px";			
+						//Make the countdown blink
+						function blink(selector){
+							$(selector).fadeOut(800, function(){
+								$(this).fadeIn(200, function(){
+									blink(this);
+								});
+							});
+						}
+						$(function() {
+							blink('#show-time');
+						});
+						
+						//If countdown reaches 1, only fade out
+						if(updateTime == 1){
+							$(selector).fadeOut(800, function(){	
+									blink(this);
+							});
+							document.getElementById("content").style.display = "inline";
+						}
+						
+						//If countdown reaches 0, hide the countdown div, show the content div and stop the interval
+						if(updateTime == 0){
+							window.clearInterval(timer);
+							document.getElementById("countdown").style.display = "none";
+							document.getElementById("content").style.display = "inline";
+						}
+					}
+					
+				// 1000 miliseconds interval
+                }, 1000);		
+			});
+		}
+		
+	</script>
+	<script>
+	$(document).ready(function(){
+
+	  	//update scores
+	  	function updateScores(numbersArray)
+	  	{
+	  		var name = "";
+	  		for (var i = 0; i < numbersArray.length; i++)
+	  		{
+	  			console.log(i);
+	  			name = "#player" + (i+1);
+	  			$(name).text(numbersArray[i]);
+	  		}
+	  	}
+
+	  	//sort that shit
+		function sortUsingNestedText(parent, childSelector, keySelector) {
+	    	var items = parent.children(childSelector).sort(function(a, b) {
+		        var vA = $(keySelector, a).text()/1000;
+		        var vB = $(keySelector, b).text()/1000;
+		        return (vA > vB) ? -1 : (vA < vB) ? 1 : 0;
+	    	});
+			parent.append(items);
+		}
+
+	  	//socket io stuff
+		var socket = io.connect('http://localhost:8080');
+	  	$('#getNums').click(function(){
+	  		socket.emit('log');
+	  	});
+
+	  	socket.on('updateScores', function(data){
+		  	updateScores(data.array);
+		  	sortUsingNestedText($('#top3leftscores'), "div", "span.points");
+	  	});
+
+	  	socket.on('updatePositions',function(data){
+	  		console.log("x: " + data.positions[0].x);
+	  		console.log("y: " + data.positions[0].y);
+	  	});
+	});
+
+
+	</script>
+	<div id="loadGame">
+	<button type="button" onclick="showDiv()">Click Me!</button> 
+	</div>
+	
+	<!-- countdown div, change value inside div to change the countdown -->
+	<div id="countdown">
+		<span id="show-time">5</span>
+	</div>
+	
+	<!-- content div, all the game stuff goes in here -->
+	<div id= "content">		
+		<div id="header">
+		
+			<!-- left team -->
+			<div id="teamleft">
+				<i class="icon-group icon-4x"></i>
+			</div>
+			<!-- score -->
+			<div id="scoresleft">
+				<h1>250</h1>
+			</div>
+			
+			<!-- top 3 players
+
+			<div id="top3left">
+				<ul>
+					<li>player</li>
+					<li>player</li>
+					<li>player</li>
+				</ul>
+			</div>	
+			 -->
+
+			<div id="top3leftscores">
+				
+					<div id="1">Player 1 <span id="player1" class="points">6561</span></div>
+					<div id="2">Player 2 <span id="player2" class="points">4520</span></div>
+					<div id="3">Player 3 <span id="player3" class="points">1560</span></div>
+					<input id='getNums' type='button' value='Change the numbers'>
+			</div>
+		
+			<!-- right team-->
+			<div id="teamright">
+				<i class="icon-group icon-4x"></i>
+			</div>
+			
+			<!-- score -->
+			<div id="scoresright">
+				<h1>150</h1>
+			</div>
+				
+				<!-- top 3 players -->
+				<div id="top3rightscores">
+				<ul>
+					<li>6561</li>
+					<li>452</li>
+					<li>156</li>
+				</ul>
+			</div>
+			<div id="top3right">
+				<ul>
+					<li>player</li>
+					<li>player</li>
+					<li>player</li>
+				</ul>
+			</div>
+		</div>
+		
+		<!-- processing canvas -->
+		
+		<div id="map">
+				 <canvas id="mapvampire" data-processing-sources="sketch_2_ballen.pde" width="50" height="75">
+					<p>Your browser does not support the canvas tag.</p>
+				</canvas>
+		</div>
+		
+		
+		<div id="footer">
+			<i class="icon-time"></i> <span class="clock">10:00</span>
+		</div>
+	</div>
+
+</body>
+</html>
