@@ -90,7 +90,7 @@ public class MainApp extends Application{
 					gpsData.put("TimeStamp", location.getTime());
 					gpsData.put("Head", location.getBearing());
 					arguments.put(gpsData);
-					ioWebSocket.emit("GPS", arguments);
+					ioWebSocket.emit("gpsUpdate", arguments);
 					Log.d("gps", arguments.toString());
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block

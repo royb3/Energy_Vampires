@@ -90,14 +90,16 @@ public class MainActivity extends Activity {
 				            editor.commit();
 				            
 				            if(ma.startConnection()){
-					            ifConnected = true;
-								info.setText("U're in lobby.");
-								BT_home.setText("I'm Ready");
-								ma.createGPS();
+					            
 								try {
 									ma.ioWebSocket.emit("debug", new JSONArray().put(value));
-								} catch (JSONException e) {
+									ifConnected = true;
+									info.setText("U're in lobby.");
+									BT_home.setText("I'm Ready");
+									ma.createGPS();
+								} catch (Exception e) {
 									// TODO Auto-generated catch block
+									Toast.makeText(getApplicationContext(), "Can't Connect!", Toast.LENGTH_SHORT).show();
 									e.printStackTrace();
 								}
 				            }

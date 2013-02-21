@@ -78,17 +78,26 @@ public class SocketIOClient {
     android.os.Handler mSendHandler;
     Looper mSendLooper;
 
-    public void emit(String name, JSONArray args) throws JSONException {
+    public void emit(String name, JSONArray args) {
         final JSONObject event = new JSONObject();
-        event.put("name", name);
-        event.put("args", args);
-        Log.d(TAG, "Emitting event: " + event.toString());
-        mSendHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                mClient.send(String.format("5:::%s", event.toString()));
-            }
-        });
+        try {
+			event.put("name", name);
+			event.put("args", args);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        try{
+	        Log.d(TAG, "Emitting event: " + event.toString());
+	        mSendHandler.post(new Runnable() {
+	            @Override
+	            public void run() {
+	                mClient.send(String.format("5:::%s", event.toString()));
+	            }
+	        });
+        }catch (Exception e){
+        	
+        }
     }
 
     private void connectSession() throws URISyntaxException {
@@ -198,13 +207,16 @@ public class SocketIOClient {
         cleanup();
     }
 
-    private void cleanup() {	
-    	mSendLooper.quit();
-        mSendLooper = null;
-        mSendHandler = null;
-    	
-        mClient.disconnect();
-        mClient = null;
+    private void cleanup() {
+    	try
+    	{
+	    	mSendLooper.quit();
+	        mSendLooper = null;
+	        mSendHandler = null;
+	    	
+	        mClient.disconnect();
+	        mClient = null;
+    	}catch(Exception e){}
     }
 
     public void connect() {
