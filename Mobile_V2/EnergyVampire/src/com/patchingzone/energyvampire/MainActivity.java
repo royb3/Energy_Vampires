@@ -146,8 +146,16 @@ public class MainActivity extends Activity {
 	        	info.setText("Click connect to connect to the server.");
 	        	return true;
 	        case R.id.Exit:
+	        	try{
 	        	ma.closeConnection();
+	        	}catch (Exception e) {
+					// TODO: handle exception
+				}
+	        	try{
 	        	ma.stopGps();
+	        	}catch (Exception e) {
+					// TODO: handle exception
+				}
 	        	finish();     	
 	        	return true;
 	        default:
