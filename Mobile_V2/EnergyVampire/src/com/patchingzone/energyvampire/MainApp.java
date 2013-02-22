@@ -97,7 +97,7 @@ public class MainApp extends Application{
 					arguments.put(gpsData);
 					ioWebSocket.emit("gpsUpdate", arguments);
 					Log.d("gps", arguments.toString());
-				} catch (JSONException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
