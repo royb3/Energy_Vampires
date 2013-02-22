@@ -19,6 +19,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Criteria;
+import android.location.GpsStatus.Listener;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -38,14 +39,17 @@ public class MainApp extends Application{
 	public static Boolean canConnect = false;
 	public static Boolean gameActive = false;
 	
+	LocationManager GPS;
+	LocationManager locationManager;
+	LocationListener listener;
+	
 	public static Thread connection;
 	public static int connectStatus = 2;
 	
 	//gps
 	public void createGPS()
 	{
-    	LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);	        	
-    	LocationManager locationManager;
+    	GPS = (LocationManager) getSystemService(LOCATION_SERVICE);	        	
     	String provider;
     	locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 	    // Define the criteria how to select the locatioin provider -> use
@@ -54,7 +58,7 @@ public class MainApp extends Application{
 	    criteria.setAccuracy(Criteria.ACCURACY_FINE);
 	    provider = locationManager.getBestProvider(criteria, false);
 	    //Log.e("asd", ""+locationManager.getAllProviders());
-	    locationManager.requestLocationUpdates(provider, 100, 1, new LocationListener() {
+	    listener = new LocationListener() {
 			
 			@Override
 			public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -98,7 +102,14 @@ public class MainApp extends Application{
 					e.printStackTrace();
 				}
 			}
-		});
+		};
+	    
+	    locationManager.requestLocationUpdates(provider, 100, 1, listener );
+	}
+	
+	public void stopGps()
+	{
+		locationManager.removeUpdates(listener);
 	}
 
 	//connection

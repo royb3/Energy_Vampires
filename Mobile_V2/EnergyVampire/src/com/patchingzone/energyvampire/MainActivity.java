@@ -6,6 +6,7 @@ import org.json.JSONException;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -143,6 +144,11 @@ public class MainActivity extends Activity {
 	        	ifConnected = ma.closeConnection();
 	        	BT_home.setText("Connect");
 	        	info.setText("Click connect to connect to the server.");
+	        	return true;
+	        case R.id.Exit:
+	        	ma.closeConnection();
+	        	ma.stopGps();
+	        	finish();     	
 	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
