@@ -45,6 +45,7 @@ public class MainApp extends Application{
 	
 	public static Thread connection;
 	public static int connectStatus = 2;
+	public static int team;
 	
 	//gps
 	public void createGPS()
@@ -174,8 +175,11 @@ public class MainApp extends Application{
 
 		    @Override
 		    public void on(String event, JSONArray arguments) {
-		        Log.d(tag, String.format("Got event %s: %s", event, arguments.toString())); 
+		        //Log.d(tag, String.format("Got event %s: %s", event, arguments.toString())); 
 		        
+		        
+		        if(event.equals("succesfull"))
+		        	sucsessfull(arguments);
 		        if(event.equals("playerJoined")) // player list
 		        	onPlayerList(arguments);
 		        if(event.equals("startGame"))
@@ -195,6 +199,24 @@ public class MainApp extends Application{
 		        MainApp.connectStatus = 2;  
 		    }
 		});
+	}
+	
+	public void sucsessfull(JSONArray input)
+	{
+		//Log.d("asD", input.toString());
+		
+		JSONObject ob;
+		try {
+			ob = input.getJSONObject(0);
+			ob = new JSONObject(ob.getString("team"));
+			MainApp.team =Integer.parseInt(ob.getString("id"));
+			Log.d("TeamID", MainApp.team + "");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.d("test", "fail");
+		}
+		
 	}
 	
 	public void startGame()

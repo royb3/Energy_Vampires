@@ -18,11 +18,11 @@ public final class R {
     }
     public static final class id {
         public static final int Count=0x7f090005;
-        public static final int Cred=0x7f090010;
-        public static final int Disconnect=0x7f090012;
-        public static final int Exit=0x7f090013;
+        public static final int Cred=0x7f090011;
+        public static final int Disconnect=0x7f090013;
+        public static final int Exit=0x7f090014;
         public static final int LinearLayout1=0x7f090007;
-        public static final int Options=0x7f090011;
+        public static final int Options=0x7f090012;
         public static final int Phone_ID_text=0x7f09000c;
         public static final int Phone_ID_textbox=0x7f09000d;
         public static final int Server_IP_text=0x7f090008;
@@ -33,11 +33,12 @@ public final class R {
         public static final int body=0x7f090001;
         public static final int body1=0x7f090000;
         public static final int button1=0x7f090004;
+        public static final int gameBackground=0x7f09000f;
         public static final int linearLayout1=0x7f090002;
-        public static final int opt1=0x7f090014;
+        public static final int opt1=0x7f090015;
         public static final int textView1=0x7f090003;
         public static final int textView2=0x7f090006;
-        public static final int webView1=0x7f09000f;
+        public static final int webView1=0x7f090010;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
