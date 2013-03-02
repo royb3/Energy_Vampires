@@ -31,34 +31,31 @@ import android.webkit.WebView.FindListener;
 
 public class MainApp extends Application{
 
-	
 	public static SharedPreferences app_preferences;
+
+	public static int team;
+	public static Boolean gameActive = false;
 	
 	public static SocketIOClient ioWebSocket;
 	public static String address;
 	public static Boolean canConnect = false;
-	public static Boolean gameActive = false;
+	public static int connectStatus = 2;
+	public static Thread connection;
 	
 	LocationManager GPS;
 	LocationManager locationManager;
 	LocationListener listener;
 	
-	public static Thread connection;
-	public static int connectStatus = 2;
-	public static int team;
-	
 	//gps
 	public void createGPS()
 	{
-    	GPS = (LocationManager) getSystemService(LOCATION_SERVICE);	        	
+		Criteria criteria = new Criteria();
+	    criteria.setAccuracy(Criteria.ACCURACY_FINE);
+    	GPS = (LocationManager) getSystemService(LOCATION_SERVICE);	    	
     	String provider;
     	locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-	    // Define the criteria how to select the locatioin provider -> use
-	    // default
-	    Criteria criteria = new Criteria();
-	    criteria.setAccuracy(Criteria.ACCURACY_FINE);
 	    provider = locationManager.getBestProvider(criteria, false);
-	    //Log.e("asd", ""+locationManager.getAllProviders());
+	    
 	    listener = new LocationListener() {
 			
 			@Override
@@ -84,7 +81,6 @@ public class MainApp extends Application{
 				JSONObject gpsData = new JSONObject();
 				JSONArray arguments = new JSONArray();
 				
-				//arguments.put("gps");
 				String vv = new SimpleDateFormat("dd-MM-yyyy , HH:mm:ss").format(df);
 				
 				try {
@@ -97,9 +93,8 @@ public class MainApp extends Application{
 					gpsData.put("Head", location.getBearing());
 					arguments.put(gpsData);
 					ioWebSocket.emit("gpsUpdate", arguments);
-					Log.d("gps", arguments.toString());
+					//Log.d("gps", arguments.toString());
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -124,7 +119,6 @@ public class MainApp extends Application{
 				@Override
 				public void run() {
 					try {
-						//MainActivity.pbConnect.setVisibility(View.VISIBLE);
 						socketCientConnection();
 						ioWebSocket.connect();
 					} catch (Exception e) {
@@ -138,11 +132,9 @@ public class MainApp extends Application{
 			while(connectStatus == 0){
 				try {
 					Thread.sleep(100);
-					
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				//Log.d("connection", "Connecting");
 			}
 		}
 		return canConnect;
@@ -156,7 +148,6 @@ public class MainApp extends Application{
 			ioWebSocket.disconnect();
 			return false;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			return true;
 		}
 	}
@@ -175,16 +166,13 @@ public class MainApp extends Application{
 
 		    @Override
 		    public void on(String event, JSONArray arguments) {
-		        //Log.d(tag, String.format("Got event %s: %s", event, arguments.toString())); 
-		        
-		        
-		        if(event.equals("succesfull"))
+		        if(event.equals("succesfull"))	//run when device connection is succesfull
 		        	sucsessfull(arguments);
-		        if(event.equals("playerJoined")) // player list
+		        if(event.equals("playerJoined"))//run when player a player has joint the game
 		        	onPlayerList(arguments);
-		        if(event.equals("startGame"))
+		        if(event.equals("startGame")) 	//starts the game
 		        	startGame();
-		        if(event.equals("stopGame"))
+		        if(event.equals("stopGame"))	//stops the game
 		        	gameActive = false;
 		    }
 
@@ -195,7 +183,6 @@ public class MainApp extends Application{
 
 		    @Override
 		    public void onError(Exception error) {
-		        //Log.e(tag, "Error!", error);
 		        MainApp.connectStatus = 2;  
 		    }
 		});
@@ -203,20 +190,15 @@ public class MainApp extends Application{
 	
 	public void sucsessfull(JSONArray input)
 	{
-		//Log.d("asD", input.toString());
-		
-		JSONObject ob;
+		//sets player's teamID
 		try {
-			ob = input.getJSONObject(0);
-			ob = new JSONObject(ob.getString("team"));
-			MainApp.team =Integer.parseInt(ob.getString("id"));
+			JSONObject team = new JSONObject(input.getJSONObject(0).getString("team"));
+			MainApp.team = Integer.parseInt(team.getString("id"));
 			Log.d("TeamID", MainApp.team + "");
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Log.d("test", "fail");
+			MainApp.team = 999;
+			Log.d("TeamID", "fail");
 		}
-		
 	}
 	
 	public void startGame()

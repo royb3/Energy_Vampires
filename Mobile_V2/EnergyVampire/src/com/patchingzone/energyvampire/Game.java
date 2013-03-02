@@ -33,7 +33,6 @@ public class Game extends Activity {
 	    
 	    exit();	    
 	    Color(ma.team);
-	    // TODO Auto-generated method stub
 	}
 	
 	public void  Color(final int color)
@@ -80,24 +79,23 @@ public class Game extends Activity {
         switch (keyCode) {
         case KeyEvent.KEYCODE_VOLUME_UP:
         case KeyEvent.KEYCODE_VOLUME_DOWN:
-        	Log.e("volume keys", "pushed");
-        	
         	ma.ioWebSocket.emit("Shoot", new JSONArray().put("I pushed the button"));
-            return true;
+        	return true;
         default:
-            return super.dispatchKeyEvent(event);
+        	return super.dispatchKeyEvent(event);
         }
     }
 	
 	@Override
 	public void onBackPressed() {
-	    // Do Here what ever you want do on back press;
+	    // prevents player from leaving the game via the back button
 		Toast.makeText(getApplicationContext(), "You shall not pass!", Toast.LENGTH_SHORT).show();
 
 	}
 	
 	public void exit()
 	{
+		//waits for the server to end the game
 		Thread exit = new Thread() {
 			@Override
 			public void run() {
@@ -106,7 +104,6 @@ public class Game extends Activity {
 					try {
 						sleep(500);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}

@@ -14,8 +14,7 @@ public class Credits extends BaseWebview {
 	    super.onCreate(savedInstanceState);
 	    
 	    changedTheme = false;
-	    SetPage("file:///android_asset/credit/index.html");	
-	    //SetPage("http://vincentict.mine.nu/credit/index.html");	
+	    SetPage("file:///android_asset/credit/index.html");		
     }
 	
 	@Override
