@@ -110,10 +110,12 @@ public class MainApp extends Application{
 
 	//connection
 	public boolean startConnection() {
-		if(app_preferences.getString("IP", "") != "" && app_preferences.getString("Port", "") != "")
+		if(true)
+		//if(app_preferences.getString("IP", "") != "" && app_preferences.getString("Port", "") != "")
 		{
 			connectStatus = 0;
-			address = "http://"+ app_preferences.getString("IP", "") +":"+ app_preferences.getString("Port", "");
+			address = "http://mediawerf.dyndns.org:7080";
+			//address = "http://"+ app_preferences.getString("IP", "") +":"+ app_preferences.getString("Port", "");
 
 			connection =  new Thread() {
 				@Override
@@ -121,6 +123,8 @@ public class MainApp extends Application{
 					try {
 						socketCientConnection();
 						ioWebSocket.connect();
+						
+					
 					} catch (Exception e) {
 						Log.e("exeption", "" + e);
 						MainApp.connectStatus = 2;

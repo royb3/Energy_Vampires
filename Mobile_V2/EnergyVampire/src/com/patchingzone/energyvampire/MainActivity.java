@@ -1,28 +1,27 @@
 package com.patchingzone.energyvampire;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 
-import android.media.AudioManager;
-import android.media.SoundPool;
-import android.os.Bundle;
-import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +30,7 @@ public class MainActivity extends Activity {
 
 	MainApp ma;
 	
-	public Button BT_home;
+	public ImageButton BT_home;
 	public TextView info;
 	public TextView count;
 	public TextView GPS;
@@ -46,6 +45,13 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        //activity in full screen
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //requestWindowFeature(Window.FEATURE_ACTION_BAR);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
+                                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_main);
         
         
@@ -56,7 +62,7 @@ public class MainActivity extends Activity {
 		this.count = (TextView) this.findViewById(R.id.Count);
 		this.GPS = (TextView) this.findViewById(R.id.textView2);
 		this.body = (RelativeLayout) this.findViewById(R.id.body); 
-		this.BT_home = (Button) this.findViewById(R.id.button1);
+		this.BT_home = (ImageButton) this.findViewById(R.id.button1);
 		
 		MainApp.app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		
@@ -70,12 +76,11 @@ public class MainActivity extends Activity {
 		this.BT_home.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+
 				if(!ifConnected){
 					//connect to server.
-					
 					final EditText input = new EditText(MainActivity.this);
-					input.setHint("Please put name here.");
+					input.setHint("Your name");
 					input.setText(ma.app_preferences.getString("ID", "")); 
 					new AlertDialog.Builder(MainActivity.this)
 				    .setTitle("Set Name")
@@ -97,7 +102,7 @@ public class MainActivity extends Activity {
 									//ma.ioWebSocket.emit("clientType", new JSONArray().put("Mobile"));
 									ifConnected = true;
 									info.setText("U're in lobby.");
-									BT_home.setText("I'm Ready");
+									//BT_home.setText("I'm Ready");
 									ma.createGPS();
 								} catch (Exception e) {
 									// TODO Auto-generated catch block
@@ -142,7 +147,7 @@ public class MainActivity extends Activity {
 	        	return true;
 	        case R.id.Disconnect:
 	        	ifConnected = ma.closeConnection();
-	        	BT_home.setText("Connect");
+	        	//BT_home.setText("Connect");
 	        	info.setText("Click connect to connect to the server.");
 	        	return true;
 	        case R.id.Exit:

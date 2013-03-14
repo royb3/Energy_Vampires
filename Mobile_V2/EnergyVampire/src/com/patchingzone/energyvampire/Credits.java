@@ -14,7 +14,7 @@ public class Credits extends BaseWebview {
 	    super.onCreate(savedInstanceState);
 	    
 	    changedTheme = false;
-	    SetPage("file:///android_asset/credit/index.html");		
+	    setPage("file:///android_asset/credit/index.html");		
     }
 	
 	@Override
@@ -29,7 +29,7 @@ public class Credits extends BaseWebview {
 	    // Handle item selection
 	    switch (item.getItemId()) {
 	        case R.id.opt1:
-	        	SetPage("javascript:SetStyle();");
+	        	setPage("javascript:SetStyle();");
 	        	changedTheme = true;
         	return true;
 	    }
