@@ -1,0 +1,57 @@
+<html>
+  <script type="text/javascript" src="app.js"></script>
+	<script>	
+		hello();
+	</script>
+	<body>
+		<div style="width: 45%; float: left; border-right: 1px; border-color: black; border-style: solid; border-top: 0px; border-left: 0px; border-bottom: 0px;">
+			<ul>
+				<li><a href="http://localhost:8888/Install">Install</a></li>
+				<li><button onclick="addGame()" type="button">Create Game</button></li>
+				<li><button onclick="addPlayer()" type="button">Create Player</button></li>
+			</ul><br />
+			------------------<br />
+			<ul>
+				<li><button onclick="listTeamPlayers()" type="button">Show Team Players</button></li>
+				<li><button onclick="getScore()" type="button">Show Individual Scores</button></li>
+				<li><button onclick="getTeamScore()" type="button">Show Team Scores</button></li>
+				<li><button onclick="addGame()" type="button">Log Events</button></li>
+			</ul><br />
+			--------- Test Part ---------<br />
+			<ul>
+				<li><button onclick="addRandomPlayer()" type="button">Create Random Players</button></li>
+				<li><button onclick="listTeamPlayers()" type="button">Create Random Game</button></li>
+				<li><button onclick="addRandomPlayer()" type="button">Test All</button></li>
+			</ul>
+		</div>
+		
+		<div style="width: 45%; float: right;">
+		
+			<p id="CreateGameDiv" style="display:none;">
+				<form id="CreateForm" action="http://localhost:8888/CreateGame" method="get">
+					<label style="width: 100px;">Game Name: </label><input type="text" id="GameName" /><br />
+					<label style="width: 100px;">Game Type: </label><input type="text" id="GameType" /><br />
+					<label style="width: 100px;">Game Teams: </label><input type="text" id="GameTeams" /><br />
+					<input type="submit" href="http://localhost:8888/CreateGame?name="+GameName+"&type="+GameType+"&team="+GameTeams+"" value="Create" />
+					<button type="button" id="HideGameCreateButton">Clear</button>
+				</form>
+			</p>
+			
+			<p id="CreatePlayerDiv" style="display:none;">
+				<label style="width: 100px;">Game ID: </label><input type="text" id="GameID" /><br />
+				<label style="width: 100px;">Player Name: </label><input type="text" id="PlayerName" /><br />
+				<label style="width: 100px;">Player Hitpoints: </label><input type="text" id="PlayerHitpoints" /><br />
+				<label style="width: 100px;">Player Team: </label><input type="text" id="PlayerTeam" /><br />
+				<label style="width: 100px;">Player Type: </label><input type="text" id="PlayerType" /><br />
+				<label style="width: 100px;">Player Device: </label><input type="text" id="PlayerDevice" /><br />
+				<button type="button" onClick="CreatePlayer(GameID, PlayerName, PlayerHitpoints, PlayerTeam, PlayerType, PlayerDevice)">Create</button>
+				<button type="button" onClick="HidePlayerCreateButton">Clear</button>
+			</p>
+			
+			<p id="text">
+				
+			</p>
+			
+		</div>
+	</body>
+</html>
